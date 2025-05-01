@@ -17,6 +17,11 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 1vw;
+
+  a {
+    text-decoration: none; /* no underline */
+    color: #5b005b;
+  }
 }
 
 a img {
