@@ -1,0 +1,75 @@
+.toolbar {
+  height: 130px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+  background-color: #000;
+  gap: 24px;
+
+  a img {
+    height: 150px;
+    flex-shrink: 0;
+  }
+
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .contact {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .input-field {
+    flex: 1 1 300px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .buttons {
+    margin-bottom: 20px;
+  }
+}
+
+.lower-toolbar {
+  gap: 24px;
+  background-color: #000;
+}
+
+.sidenav-container {
+  height: 100vh;
+  background-color: #ffffff;
+  color: #000;
+}
+
+.sidenav {
+  width: 250px;
+  margin-top: 190px;
+  margin-bottom: 400px;
+  padding: 16px;
+  background-color: #000000;
+
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+}

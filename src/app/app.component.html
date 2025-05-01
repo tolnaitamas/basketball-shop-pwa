@@ -1,3 +1,60 @@
-<h1>BasketBall Shop PWA</h1>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" class="sidenav" [(opened)]="sidenavOpened">
+    <h3>Kategóriák</h3>
+    <button mat-button (click)="navigateTo('/products')">Ruhák</button>
+    <button mat-button (click)="navigateTo('/products')">Cipők</button>
+    <button mat-button (click)="navigateTo('/products')">Sapkák</button>
+    <button mat-button (click)="navigateTo('/products')">Kiegészítők</button>
+    <button mat-button (click)="navigateTo('/products')">Játékosok</button>
+  </mat-sidenav>
 
-<router-outlet />
+  <mat-toolbar class="toolbar">
+    <a routerLink="/main">
+      <img src="/dunk_shop_logo.png" alt="dunk_shop_logo" />
+    </a>
+
+    <div class="toolbar-right">
+      <div class="contact">
+        Ügyfélszolgálat:<br />
+        H-P 9:00-13:00<br />
+        info&#64;dunkshop.hu<br />
+        +36-1 451-8889
+      </div>
+
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Keresés</mat-label>
+        <input matInput />
+
+        <button mat-icon-button matSuffix color="primary" aria-label="Keresés">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-flat-button class="buttons" routerLink="/profile">
+        <mat-icon>person</mat-icon>Profil
+      </button>
+
+      <button mat-flat-button class="buttons" routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>Kosár
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-toolbar class="lower-toolbar">
+    <button mat-flat-button color="primary" (click)="sidenav.toggle()">
+      <mat-icon>menu-icon</mat-icon>Kategóriák
+    </button>
+
+    <button mat-flat-button class="buttons" routerLink="/profile">
+      Visszaküldés
+    </button>
+
+    <button mat-flat-button class="buttons" routerLink="/cart">
+      Üzleteink
+    </button>
+    <button mat-flat-button class="buttons" routerLink="/cart">
+      Dolgozz velünk!
+    </button>
+  </mat-toolbar>
+  <router-outlet />
+</mat-sidenav-container>
