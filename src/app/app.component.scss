@@ -1,5 +1,5 @@
 .toolbar {
-  height: 14vh;
+  min-height: 14vh;
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -71,4 +71,141 @@ a img {
 
 .exchange {
   width: 6vw;
+}
+
+// ---- RESPONSIVE STYLES ----
+
+@media (max-width: 1024px) {
+  .toolbar {
+    flex-wrap: wrap;
+    padding: 2vh 5vw;
+    height: auto;
+    gap: 2vh;
+    justify-content: center;
+
+    a img {
+      height: 12vh;
+    }
+
+    .contact {
+      font-size: 1.8vh;
+      text-align: center;
+    }
+
+    .input-field {
+      flex: 1 1 60vw;
+    }
+
+    .exchange {
+      width: 20vw;
+    }
+
+    .buttons {
+      margin-bottom: 1.5vh;
+    }
+  }
+
+  .lower-toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vw;
+    padding: 1vh 5vw;
+  }
+
+  .sidenav {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2vh;
+
+    a {
+      display: flex;
+      justify-content: center;
+    }
+
+    a img {
+      height: 10vh;
+    }
+
+    .contact {
+      font-size: 1.6vh;
+      text-align: center;
+    }
+
+    .input-field {
+      width: 80vw;
+      flex: 1 1 auto;
+    }
+
+    .exchange {
+      width: 40vw;
+    }
+
+    .buttons {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .lower-toolbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+  }
+
+  .sidenav {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 2vh;
+
+    h3 {
+      font-size: 2.2vh;
+    }
+
+    button {
+      font-size: 2vh;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    padding: 2vh 2vw;
+
+    a img {
+      height: 8vh;
+    }
+
+    .contact {
+      font-size: 1.4vh;
+    }
+
+    .input-field {
+      width: 90vw;
+    }
+
+    .exchange {
+      width: 60vw;
+    }
+
+    .buttons {
+      font-size: 1.4vh;
+    }
+  }
+
+  .lower-toolbar {
+    padding: 1vh 2vw;
+  }
+
+  .sidenav {
+    h3 {
+      font-size: 2vh;
+    }
+  }
 }
