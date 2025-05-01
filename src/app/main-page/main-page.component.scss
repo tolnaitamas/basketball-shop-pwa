@@ -22,3 +22,23 @@
   object-fit: cover;
   flex-shrink: 0;
 }
+
+.features {
+  margin-top: 2vh;
+  display: flex;
+  gap: 8vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8vh;
+  color: #000;
+
+  p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+}
