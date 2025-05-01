@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatIconModule,
     CommonModule,
+    MatSelectModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

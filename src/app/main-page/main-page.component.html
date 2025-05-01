@@ -1,1 +1,14 @@
-<h1 style="height: 2000px">main-page works!</h1>
+<div class="slider-wrapper">
+  <div
+    class="slider-track"
+    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+  >
+    <img
+      *ngFor="let image of images"
+      [src]="image"
+      class="slider-image"
+      alt="slider"
+    />
+  </div>
+</div>
+<div></div>

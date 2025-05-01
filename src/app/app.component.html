@@ -13,35 +13,41 @@
       <img src="/dunk_shop_logo.png" alt="dunk_shop_logo" />
     </a>
 
-    <div class="toolbar-right">
-      <div class="contact">
-        Ügyfélszolgálat:<br />
-        H-P 9:00-13:00<br />
-        info&#64;dunkshop.hu<br />
-        +36-1 451-8889
-      </div>
-
-      <mat-form-field appearance="outline" class="input-field">
-        <mat-label>Keresés</mat-label>
-        <input matInput />
-
-        <button mat-icon-button matSuffix color="primary" aria-label="Keresés">
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <button mat-flat-button class="buttons" routerLink="/profile">
-        <mat-icon>person</mat-icon>Profil
-      </button>
-
-      <button mat-flat-button class="buttons" routerLink="/cart">
-        <mat-icon>shopping_cart</mat-icon>Kosár
-      </button>
+    <div class="contact">
+      Ügyfélszolgálat:<br />
+      H-P 9:00-13:00<br />
+      info&#64;dunkshop.hu<br />
+      +36-1 451-8889
     </div>
+
+    <mat-form-field appearance="outline" class="input-field">
+      <mat-label>Keresés</mat-label>
+      <input matInput />
+
+      <button mat-icon-button matSuffix aria-label="Keresés">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="exchange">
+      <mat-label>Valuta</mat-label>
+      <mat-select>
+        <mat-option>Ft (HUF)</mat-option>
+        <mat-option>€ (EUR)</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-flat-button class="buttons" routerLink="/profile">
+      <mat-icon>person</mat-icon>Profil
+    </button>
+
+    <button mat-flat-button class="buttons" routerLink="/cart">
+      <mat-icon>shopping_cart</mat-icon>Kosár
+    </button>
   </mat-toolbar>
 
   <mat-toolbar class="lower-toolbar">
-    <button mat-flat-button color="primary" (click)="sidenav.toggle()">
+    <button mat-flat-button class="buttons" (click)="sidenav.toggle()">
       <mat-icon>menu-icon</mat-icon>Kategóriák
     </button>
 
