@@ -44,6 +44,27 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'work-with-us',
+    loadComponent: () =>
+      import('./work-with-us-page/work-with-us-page.component').then(
+        (c) => c.WorkWithUsPageComponent
+      ),
+  },
+  {
+    path: 'our-stores',
+    loadComponent: () =>
+      import('./our-stores-page/our-stores-page.component').then(
+        (c) => c.OurStoresPageComponent
+      ),
+  },
+  {
+    path: 'return',
+    loadComponent: () =>
+      import('./return-page/return-page.component').then(
+        (c) => c.ReturnPageComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'main',
   },
