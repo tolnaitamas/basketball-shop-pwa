@@ -1,1 +1,12 @@
-<p>product-card works!</p>
+<div class="card">
+  <img [src]="imageUrl" alt="{{ name }}" class="image" />
+  <h2>{{ name }}</h2>
+  <p class="price">{{ price + "HUF" }}</p>
+  <div class="sizes">
+    <label>Méret:</label>
+    <select [(ngModel)]="selectedSize">
+      <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+    </select>
+  </div>
+  <button (click)="addToCart()">Kosárba</button>
+</div>
