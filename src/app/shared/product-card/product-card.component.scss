@@ -1,9 +1,17 @@
 .card {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
   background-color: #262324;
   width: 300px;
   height: 550px;
   margin: 1rem auto;
   padding: 1rem;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.025); /* Kép nagyítása hoverre */
+  }
 }
 
 .image {

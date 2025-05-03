@@ -34,6 +34,9 @@ export class MainPageComponent {
 
   products: Product[] = [
     {
+      id: 1,
+      sex: 'Férfi',
+      brand: 'Jordan',
       name: 'Air Jordan 1 Low White/Metallic Gold-Black',
       imageUrl: 'main-page/asd.webp',
       price: 53999,
@@ -41,6 +44,9 @@ export class MainPageComponent {
       selectedSize: 40,
     },
     {
+      id: 2,
+      sex: 'Férfi',
+      brand: 'Nike',
       name: 'Nike Air Max 97 Silver Bullet',
       imageUrl: 'main-page/asd.webp',
       price: 74999,
@@ -48,6 +54,9 @@ export class MainPageComponent {
       selectedSize: 42,
     },
     {
+      id: 3,
+      sex: 'Női',
+      brand: 'Adidas',
       name: 'Adidas UltraBoost 21',
       imageUrl: 'main-page/asd.webp',
       price: 86999,
@@ -55,6 +64,9 @@ export class MainPageComponent {
       selectedSize: 41,
     },
     {
+      id: 4,
+      sex: 'Férfi',
+      brand: 'Puma',
       name: 'Puma RS-X3',
       imageUrl: 'main-page/asd.webp',
       price: 59999,
