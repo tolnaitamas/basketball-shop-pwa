@@ -88,3 +88,30 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
   }
 }
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap; /* A termékek át tudnak törni, ha nincs elég hely */
+  justify-content: space-between; /* A termékek egyenletesen eloszlanak */
+  gap: 20px; /* 20px távolság a termékek között */
+  margin: auto 10vw;
+  padding: 1rem; /* Párnázás a termékek körül */
+
+  /* Ha mobilról jön, ne legyen túl nagy */
+  @media (max-width: 1615px) {
+    justify-content: center; /* A termékek egyenletesen eloszlanak */
+    gap: 60px; /* 20px távolság a termékek között */
+  }
+}
+
+.maybe-products {
+  display: flex;
+  justify-content: center; /* Középre igazítás vízszintesen */
+  align-items: center; /* Középre igazítás függőlegesen */
+  height: 10vh;
+
+  h2 {
+    font-weight: bold; /* Félkövér betűstílus */
+    font-size: 2rem; /* Opcionálisan változtathatsz a betűméreten */
+  }
+}
