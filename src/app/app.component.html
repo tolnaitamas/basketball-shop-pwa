@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="wrapper">
   <mat-sidenav #sidenav mode="over" class="sidenav" [(opened)]="sidenavOpened">
     <h3>Kategóriák</h3>
     <button mat-button (click)="navigateTo('/products')">Ruhák</button>
@@ -9,64 +9,67 @@
   </mat-sidenav>
 
   <mat-toolbar class="toolbar">
-    <a routerLink="/main">
-      <img src="/dunk_shop_logo.png" alt="dunk_shop_logo" />
-    </a>
+    <div class="toolbar-top">
+      <a routerLink="/main">
+        <img src="/dunk_shop_logo.png" alt="dunk_shop_logo" />
+      </a>
 
-    <div class="contact">
-      <p>Ügyfélszolgálat:</p>
-      <p>H-P 9:00-13:00</p>
-      <p>info&#64;dunkshop.hu</p>
-      <p>+36-1 451-8889</p>
+      <div class="contact">
+        <p>Ügyfélszolgálat:</p>
+        <p>H-P 9:00-13:00</p>
+        <p>info&#64;dunkshop.hu</p>
+        <p>+36-1 451-8889</p>
+      </div>
+
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Keresés</mat-label>
+        <input matInput />
+        <button mat-icon-button matSuffix aria-label="Keresés">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="exchange">
+        <mat-label>Valuta</mat-label>
+        <mat-select>
+          <mat-option>Ft (HUF)</mat-option>
+          <mat-option>€ (EUR)</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button class="buttons" routerLink="/profile">
+        <mat-icon>person</mat-icon>Profil
+      </button>
+
+      <button mat-flat-button class="buttons" routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>Kosár
+      </button>
     </div>
 
-    <mat-form-field appearance="outline" class="input-field">
-      <mat-label>Keresés</mat-label>
-      <input matInput />
-
-      <button mat-icon-button matSuffix aria-label="Keresés">
-        <mat-icon>search</mat-icon>
+    <div class="toolbar-bottom">
+      <button mat-flat-button class="buttons" (click)="sidenav.toggle()">
+        <mat-icon>menu-icon</mat-icon>Kategóriák
       </button>
-    </mat-form-field>
 
-    <mat-form-field class="exchange">
-      <mat-label>Valuta</mat-label>
-      <mat-select>
-        <mat-option>Ft (HUF)</mat-option>
-        <mat-option>€ (EUR)</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <button mat-flat-button class="buttons" routerLink="/return">
+        Visszaküldés
+      </button>
 
-    <button mat-flat-button class="buttons" routerLink="/profile">
-      <mat-icon>person</mat-icon>Profil
-    </button>
+      <button mat-flat-button class="buttons" routerLink="/our-stores">
+        Üzleteink
+      </button>
 
-    <button mat-flat-button class="buttons" routerLink="/cart">
-      <mat-icon>shopping_cart</mat-icon>Kosár
-    </button>
-  </mat-toolbar>
-
-  <mat-toolbar class="lower-toolbar">
-    <button mat-flat-button class="buttons" (click)="sidenav.toggle()">
-      <mat-icon>menu-icon</mat-icon>Kategóriák
-    </button>
-
-    <button mat-flat-button class="buttons" routerLink="/return">
-      Visszaküldés
-    </button>
-
-    <button mat-flat-button class="buttons" routerLink="/our-stores">
-      Üzleteink
-    </button>
-    <button mat-flat-button class="buttons" routerLink="/work-with-us">
       <a
         href="https://cas-software.hu/dolgozz-velunk/"
         target="_blank"
         rel="noopener"
       >
-        Dolgozz velünk!
+        <button mat-flat-button class="buttons" routerLink="/work-with-us">
+          Dolgozz velünk!
+        </button>
       </a>
-    </button>
+    </div>
   </mat-toolbar>
+
   <router-outlet />
 </mat-sidenav-container>

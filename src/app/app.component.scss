@@ -1,57 +1,17 @@
-.toolbar {
-  min-height: 14vh;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 10vw;
-  background-color: #000;
-  gap: 1vw;
-}
+// Változók
+$toolbar-padding: 1rem;
+$toolbar-bg: #000;
+$toolbar-gap: 1rem;
+$button-padding: 0.5rem 1rem;
+$contact-font-size: 0.85rem;
+$color: #000;
 
-.lower-toolbar {
-  display: flex;
-  flex: 1;
-  background-color: #000;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 1vw;
-
-  a {
-    text-decoration: none; /* no underline */
-    color: #5b005b;
-  }
-}
-
-a img {
-  height: 16vh;
-}
-
-.contact {
-  font-size: 2vh;
-  line-height: 0.5;
-  color: #ffffff;
-  white-space: nowrap;
-}
-
-.input-field {
-  flex: 1 1 20vw;
-}
-
-.buttons {
-  margin-bottom: 2vh;
-  display: flex;
-  align-items: center;
-  gap: 0.025vw;
-}
-
-.sidenav-container {
+.wrapper {
   flex-wrap: wrap;
   flex: 1;
   height: 100vh;
   background-color: #ffffff;
-  color: #000;
+  color: $color;
 }
 
 .sidenav {
@@ -59,7 +19,7 @@ a img {
   margin-top: 21vh;
   margin-bottom: 42vh;
   padding: 1vw;
-  background-color: #000000;
+  background-color: $color;
 
   h3 {
     margin-top: 0;
@@ -74,143 +34,80 @@ a img {
   }
 }
 
-.exchange {
-  width: 6vw;
+// Mixinek
+@mixin flex-row($align: center, $justify: flex-start, $gap: 1rem) {
+  display: flex;
+  flex-direction: row;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
 }
 
-// ---- RESPONSIVE STYLES ----
-
-@media (max-width: 1024px) {
-  .toolbar {
-    flex-wrap: wrap;
-    padding: 2vh 5vw;
-    height: auto;
-    gap: 2vh;
-    justify-content: center;
-
-    a img {
-      height: 12vh;
-    }
-
-    .contact {
-      font-size: 1.8vh;
-      text-align: center;
-    }
-
-    .input-field {
-      flex: 1 1 60vw;
-    }
-
-    .exchange {
-      width: 20vw;
-    }
-
-    .buttons {
-      margin-bottom: 1.5vh;
-    }
-  }
-
-  .lower-toolbar {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2vw;
-    padding: 1vh 5vw;
-  }
-
-  .sidenav {
-    width: 30vw;
-  }
+@mixin flex-column($align: center, $justify: flex-start, $gap: 1rem) {
+  display: flex;
+  flex-direction: column;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
 }
 
-@media (max-width: 768px) {
-  .toolbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 2vh;
+// Toolbar stílus
+.toolbar {
+  background-color: $toolbar-bg;
+  padding: $toolbar-padding;
+  height: 30%;
+  @include flex-column(flex-start, flex-start, 0.5rem);
+
+  .toolbar-top {
+    @include flex-row(center, space-between, $toolbar-gap);
+    width: 100%;
+    flex-wrap: wrap;
 
     a {
-      display: flex;
-      justify-content: center;
-    }
-
-    a img {
-      height: 10vh;
-    }
-
-    .contact {
-      font-size: 1.6vh;
-      text-align: center;
-    }
-
-    .input-field {
-      width: 80vw;
-      flex: 1 1 auto;
-    }
-
-    .exchange {
-      width: 40vw;
-    }
-
-    .buttons {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  .lower-toolbar {
-    flex-direction: column;
-    align-items: center;
-    gap: 1vh;
-  }
-
-  .sidenav {
-    width: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 2vh;
-
-    h3 {
-      font-size: 2.2vh;
-    }
-
-    button {
-      font-size: 2vh;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .toolbar {
-    padding: 2vh 2vw;
-
-    a img {
-      height: 8vh;
+      flex: 4;
+      margin-left: 10%;
+      img {
+        height: auto;
+        width: 100%;
+      }
     }
 
     .contact {
-      font-size: 1.4vh;
+      @include flex-column(flex-start, flex-start, 0.25rem);
+      font-size: $contact-font-size;
+      line-height: 0.01;
+      flex: 1;
     }
 
-    .input-field {
-      width: 90vw;
+    .search-field {
+      flex: 3;
     }
-
     .exchange {
-      width: 60vw;
+      min-width: 150px;
+      flex: 1;
     }
 
     .buttons {
-      font-size: 1.4vh;
+      flex: 1;
+      padding: $button-padding;
+      margin-bottom: 15px;
+      white-space: nowrap;
     }
   }
 
-  .lower-toolbar {
-    padding: 1vh 2vw;
-  }
+  .toolbar-bottom {
+    @include flex-row(center, flex-start, $toolbar-gap);
+    flex-wrap: wrap;
 
-  .sidenav {
-    h3 {
-      font-size: 2vh;
+    .buttons {
+      width: 150px;
+      flex: 1;
+      padding: $button-padding;
+    }
+
+    a {
+      flex: 1;
+      text-decoration: none;
     }
   }
 }
