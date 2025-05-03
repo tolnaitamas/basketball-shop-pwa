@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { ProductCardComponent } from '../shared/product-card/product-card.component';
 import { Router } from '@angular/router';
-import { Product } from '../shared/types/Product';
+import { Product } from '../shared/types/product';
 
 @Component({
   selector: 'app-main-page',

@@ -1,14 +1,30 @@
-<div class="card">
-  <img [src]="product.imageUrl" alt="{{ product.name }}" class="image" />
-  <h2>{{ product.name }}</h2>
-  <p class="price">{{ product.price }} HUF</p>
-  <div class="sizes">
-    <label for="size">Méret:</label>
-    <select [(ngModel)]="product.selectedSize" id="size">
-      <option *ngFor="let size of product.sizes" [value]="size">
-        {{ size }}
-      </option>
-    </select>
-  </div>
-  <button mat-flat-button (click)="addToCart()">Kosárba</button>
-</div>
+<mat-card class="card">
+  <img
+    mat-card-image
+    [src]="product.imageUrl"
+    alt="{{ product.name }}"
+    class="image"
+  />
+
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>{{ product.price }} HUF</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="sizes">
+      <mat-form-field appearance="outline">
+        <mat-label for="size">Méret:</mat-label>
+        <mat-select [(ngModel)]="product.selectedSize" id="size">
+          <mat-option *ngFor="let size of product.sizes" [value]="size">
+            {{ size }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-flat-button (click)="addToCart()">Kosárba</button>
+  </mat-card-actions>
+</mat-card>
