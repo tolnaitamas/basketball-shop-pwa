@@ -1,1 +1,42 @@
-<p>product-page works!</p>
+<div class="product-detail">
+  <h1 class="product-title">{{ product.name }}</h1>
+  <p class="product-id">Cikkszám: {{ product.id }}</p>
+
+  <div class="product-container">
+    <!-- Kép -->
+    <div class="product-image">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" />
+    </div>
+
+    <!-- Adatok -->
+    <div class="product-info">
+      <p><strong>Cikkszám:</strong> {{ product.id }}</p>
+      <p><strong>Márka:</strong> {{ product.brand }}</p>
+      <p><strong>Nem:</strong> {{ product.sex }}</p>
+    </div>
+
+    <!-- Méret + Gomb -->
+    <div class="product-action">
+      <label>Méret:</label>
+      <div class="sizes">
+        <button
+          mat-stroked-button
+          *ngFor="let size of product.sizes"
+          [class.active]="size === product.selectedSize"
+          (click)="product.selectedSize = size"
+        >
+          {{ size }}
+        </button>
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        class="buy-button"
+        (click)="addToCart()"
+      >
+        Kosárba
+      </button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
