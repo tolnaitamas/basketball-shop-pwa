@@ -1,0 +1,89 @@
+// 1. Változók
+$font-family: "Arial", sans-serif;
+$primary-color: #007bff;
+$heading-font-weight: bold;
+$line-height: 1.6;
+$margin-bottom: 1.5rem;
+$spacing: 2rem;
+$logo-width: 150px;
+
+// 4. Mixin-ek
+@mixin text-center {
+  text-align: center;
+}
+
+@mixin font-weight-bold {
+  font-weight: $heading-font-weight;
+}
+
+@mixin margin-bottom($value: $margin-bottom) {
+  margin-bottom: $value;
+}
+
+@mixin padding(
+  $top: $spacing,
+  $right: $spacing,
+  $bottom: $spacing,
+  $left: $spacing
+) {
+  padding: $top $right $bottom $left;
+}
+
+// 5. Örököltethető szelektorok
+%heading-style {
+  font-weight: $heading-font-weight;
+  font-family: $font-family;
+  margin-bottom: $spacing;
+}
+
+// 2. Beágyazható szelektorok
+.return-info {
+  @include padding($spacing, $spacing); // Központi padding
+
+  font-family: $font-family;
+  line-height: $line-height;
+
+  .main-title {
+    @include text-center; // Középre igazítás
+    @include font-weight-bold;
+    @include margin-bottom($spacing);
+  }
+
+  .foxpost-logo {
+    display: block;
+    margin: $spacing auto;
+    width: $logo-width;
+    height: auto;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    @extend %heading-style; // Örökölt stílus
+    margin-top: $spacing;
+    margin-bottom: $margin-bottom;
+  }
+
+  .sub-title {
+    font-size: 1rem;
+    @extend %heading-style;
+    margin-top: 1.5rem;
+    margin-bottom: $margin-bottom;
+  }
+
+  ul {
+    margin-left: 2rem;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
