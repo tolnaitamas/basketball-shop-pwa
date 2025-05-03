@@ -1,7 +1,6 @@
 .slider-wrapper {
   margin-top: 10px;
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 10vw;
   width: 80%;
   overflow: hidden;
   display: flex;
@@ -41,5 +40,67 @@
     gap: 0.5vw;
     white-space: nowrap;
     font-weight: bold;
+  }
+}
+
+.players {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem; /* Képek közötti távolság */
+  padding: 1rem;
+}
+
+.player {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  img {
+    height: 30vh; /* Beállíthatod a képek magasságát */
+    width: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .player-name {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05); /* Kép nagyítása hoverre */
+  }
+
+  /* Ha mobilról jön, ne legyen túl nagy */
+  @media (max-width: 768px) {
+    img {
+      height: 150px; /* Mobilon kisebb képek */
+    }
+  }
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap; /* A termékek át tudnak törni, ha nincs elég hely */
+  justify-content: space-between; /* A termékek egyenletesen eloszlanak */
+  gap: 20px; /* 20px távolság a termékek között */
+  margin: auto 10vw;
+  padding: 1rem; /* Párnázás a termékek körül */
+}
+
+.top-products {
+  display: flex;
+  justify-content: center; /* Középre igazítás vízszintesen */
+  align-items: center; /* Középre igazítás függőlegesen */
+  height: 10vh;
+
+  h2 {
+    font-weight: bold; /* Félkövér betűstílus */
+    font-size: 2rem; /* Opcionálisan változtathatsz a betűméreten */
   }
 }

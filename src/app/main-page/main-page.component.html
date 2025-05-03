@@ -1,21 +1,53 @@
-<div class="slider-wrapper">
-  <div
-    class="slider-track"
-    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
-  >
-    <img
-      *ngFor="let image of images"
-      [src]="image"
-      class="slider-image"
-      alt="slider"
-    />
+<div>
+  <div class="slider-wrapper">
+    <div
+      class="slider-track"
+      [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+    >
+      <img
+        *ngFor="let image of images"
+        [src]="image"
+        class="slider-image"
+        alt="slider"
+      />
+    </div>
   </div>
+  <div class="features">
+    <p>🚚 Gyors szállítás</p>
+    <p>🏀 Prémium kosaras cuccok</p>
+    <p>♻️ 30 napos csere opció</p>
+    <p>🚗 Ingyenes visszaküldés</p>
+  </div>
+  <div class="players">
+    <div class="player" (click)="navigateTo('/products')">
+      <img src="/main-page/curry.webp" alt="curry" />
+      <p class="player-name">Stephen Curry</p>
+    </div>
+    <div class="player" (click)="navigateTo('/products')">
+      <img src="/main-page/lebron.webp" alt="lebron" />
+      <p class="player-name">LeBron James</p>
+    </div>
+    <div class="player" (click)="navigateTo('/products')">
+      <img src="/main-page/durant.webp" alt="durant" />
+      <p class="player-name">Kevin Durant</p>
+    </div>
+    <div class="player" (click)="navigateTo('/products')">
+      <img src="/main-page/giannis.webp" alt="giannis" />
+      <p class="player-name">Giannis Antetokounmpo</p>
+    </div>
+    <div class="player" (click)="navigateTo('/products')">
+      <img src="/main-page/lamelo.webp" alt="lamelo" />
+      <p class="player-name">LaMelo Ball</p>
+    </div>
+  </div>
+  <div class="top-products">
+    <h2>TOP TERMÉKEK</h2>
+  </div>
+  <div class="product-list">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product"
+    ></app-product-card>
+  </div>
+  <app-footer></app-footer>
 </div>
-<div class="features">
-  <p>🚚 Gyors szállítás</p>
-  <p>🏀 Prémium kosaras cuccok</p>
-  <p>♻️ 30 napos csere opció</p>
-  <p>🚗 Ingyenes visszaküldés</p>
-</div>
-<app-product-card></app-product-card>
-<app-footer></app-footer>

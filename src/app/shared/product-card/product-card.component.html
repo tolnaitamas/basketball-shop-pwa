@@ -1,12 +1,14 @@
 <div class="card">
-  <img [src]="imageUrl" alt="{{ name }}" class="image" />
-  <h2>{{ name }}</h2>
-  <p class="price">{{ price + "HUF" }}</p>
+  <img [src]="product.imageUrl" alt="{{ product.name }}" class="image" />
+  <h2>{{ product.name }}</h2>
+  <p class="price">{{ product.price }} HUF</p>
   <div class="sizes">
-    <label>Méret:</label>
-    <select [(ngModel)]="selectedSize">
-      <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+    <label for="size">Méret:</label>
+    <select [(ngModel)]="product.selectedSize" id="size">
+      <option *ngFor="let size of product.sizes" [value]="size">
+        {{ size }}
+      </option>
     </select>
   </div>
-  <button (click)="addToCart()">Kosárba</button>
+  <button mat-flat-button (click)="addToCart()">Kosárba</button>
 </div>
