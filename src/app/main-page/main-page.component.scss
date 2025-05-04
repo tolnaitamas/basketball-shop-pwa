@@ -48,7 +48,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 2rem; /* Képek közötti távolság */
+  gap: 2rem;
   padding: 1rem;
 }
 
@@ -58,7 +58,7 @@
   transition: transform 0.3s ease-in-out;
 
   img {
-    height: 30vh; /* Beállíthatod a képek magasságát */
+    height: 30vh;
     width: auto;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out;
@@ -73,40 +73,37 @@
 
   &:hover,
   &:focus {
-    transform: scale(1.05); /* Kép nagyítása hoverre */
+    transform: scale(1.05);
   }
 
-  /* Ha mobilról jön, ne legyen túl nagy */
   @media (max-width: 768px) {
     img {
-      height: 150px; /* Mobilon kisebb képek */
+      height: 150px;
     }
   }
 }
 
 .product-list {
   display: flex;
-  flex-wrap: wrap; /* A termékek át tudnak törni, ha nincs elég hely */
-  justify-content: space-between; /* A termékek egyenletesen eloszlanak */
-  gap: 20px; /* 20px távolság a termékek között */
-  margin: auto 10vw;
-  padding: 1rem; /* Párnázás a termékek körül */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 1rem;
 
-  /* Ha mobilról jön, ne legyen túl nagy */
   @media (max-width: 1615px) {
-    justify-content: center; /* A termékek egyenletesen eloszlanak */
-    gap: 60px; /* 20px távolság a termékek között */
+    justify-content: center;
+    gap: 60px;
   }
 }
 
 .top-products {
   display: flex;
-  justify-content: center; /* Középre igazítás vízszintesen */
-  align-items: center; /* Középre igazítás függőlegesen */
+  justify-content: center;
+  align-items: center;
   height: 10vh;
 
   h2 {
-    font-weight: bold; /* Félkövér betűstílus */
-    font-size: 2rem; /* Opcionálisan változtathatsz a betűméreten */
+    font-weight: bold;
+    font-size: 2rem;
   }
 }

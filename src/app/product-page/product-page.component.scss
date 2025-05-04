@@ -2,7 +2,7 @@ $product-title-color: #1a1a1a;
 $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
 .product-detail {
-  margin: 0 auto; // Ez hozza középre
+  margin: 0 auto;
 
   width: 80%;
   padding: 2rem;
@@ -91,27 +91,26 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
 .product-list {
   display: flex;
-  flex-wrap: wrap; /* A termékek át tudnak törni, ha nincs elég hely */
-  justify-content: space-between; /* A termékek egyenletesen eloszlanak */
-  gap: 20px; /* 20px távolság a termékek között */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
   margin: auto 10vw;
-  padding: 1rem; /* Párnázás a termékek körül */
+  padding: 1rem;
 
-  /* Ha mobilról jön, ne legyen túl nagy */
   @media (max-width: 1615px) {
-    justify-content: center; /* A termékek egyenletesen eloszlanak */
-    gap: 60px; /* 20px távolság a termékek között */
+    justify-content: center;
+    gap: 60px;
   }
 }
 
 .maybe-products {
   display: flex;
-  justify-content: center; /* Középre igazítás vízszintesen */
-  align-items: center; /* Középre igazítás függőlegesen */
+  justify-content: center;
+  align-items: center;
   height: 10vh;
 
   h2 {
-    font-weight: bold; /* Félkövér betűstílus */
-    font-size: 2rem; /* Opcionálisan változtathatsz a betűméreten */
+    font-weight: bold;
+    font-size: 2rem;
   }
 }
