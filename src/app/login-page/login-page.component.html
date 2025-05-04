@@ -1,0 +1,40 @@
+<div class="user-modal">
+  <div class="user-modal-content">
+    <div class="modal-header">
+      <h3>BELÉPÉS</h3>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="login()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" type="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Jelszó</mat-label>
+        <input matInput formControlName="password" type="password" required />
+      </mat-form-field>
+
+      <div class="button-row">
+        <button
+          mat-flat-button
+          color="primary"
+          class="login-button"
+          type="submit"
+        >
+          Belép <span class="arrow">→</span>
+        </button>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="register-button"
+          (click)="register()"
+        >
+          Regisztráció <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>
