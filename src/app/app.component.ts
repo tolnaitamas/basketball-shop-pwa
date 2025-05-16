@@ -29,7 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'basketball-shop-pwa';
+  title = 'DunkShop Budapest';
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
