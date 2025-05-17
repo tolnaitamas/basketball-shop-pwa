@@ -1,0 +1,102 @@
+.modal-header {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.register-container {
+  width: 90vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  z-index: 1000;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  .section-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-section {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      color: #1a1a1a;
+    }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .half-width {
+    width: 48%;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .button-wrapper {
+    text-align: right;
+
+    .submit-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 48px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .policy-text {
+    font-size: 0.85rem;
+    a {
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  p {
+    color: #000;
+  }
+}
+
+@media (max-width: 600px) {
+  .register-container {
+    padding: 1rem;
+
+    .half-width {
+      width: 100%;
+    }
+
+    .button-wrapper {
+      text-align: center;
+
+      .submit-btn {
+        width: 100%;
+        height: 52px;
+        font-size: 1rem;
+      }
+    }
+  }
+}

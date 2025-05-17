@@ -1,1 +1,83 @@
-<p>profile-page works!</p>
+<div class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+      <h3>PROFIL</h3>
+      <h5>ADATOK MÓDOSÍTÁSA</h5>
+    </div>
+    <!-- REGISZTRÁCIÓS ADATOK -->
+    <div class="form-section">
+      <h3>REGISZTRÁCIÓS ADATOK</h3>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Jelszó</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Írja be ismét a jelszót</mat-label>
+          <input matInput type="password" formControlName="confirmPassword" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- KAPCSOLATTARTÓ ADATOK -->
+    <div class="form-section">
+      <h3>KAPCSOLATTARTÓ ADATOK</h3>
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Mobilszám</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+    </div>
+
+    <!-- SZÁLLÍTÁSI ADATOK -->
+    <div class="form-section">
+      <h3>SZÁLLÍTÁSI ADATOK</h3>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Név</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ország</mat-label>
+        <mat-select formControlName="country">
+          <mat-option value="hu">Magyarország</mat-option>
+          <!-- További opciók -->
+        </mat-select>
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Irányítószám</mat-label>
+          <input matInput formControlName="zip" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Település</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Utca, házszám</mat-label>
+        <input matInput formControlName="address" />
+      </mat-form-field>
+    </div>
+
+    <!-- GOMB -->
+    <div class="button-wrapper">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Módosítás <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
+<app-footer></app-footer>
