@@ -16,7 +16,9 @@ $color: #000;
 
 .sidenav {
   height: 40vh;
+  min-height: 300px;
   width: 200px;
+  min-width: 100px;
   margin-top: 27.5vh;
   margin-bottom: 42vh;
   padding: 1vw;
@@ -69,6 +71,7 @@ $color: #000;
       margin-left: 10%;
       img {
         height: auto;
+        min-width: 300px;
         width: 100%;
       }
     }
@@ -81,6 +84,7 @@ $color: #000;
     }
 
     .search-field {
+      min-width: 200px;
       flex: 3;
     }
     .exchange {
@@ -93,6 +97,7 @@ $color: #000;
       padding: $button-padding;
       margin-bottom: 15px;
       white-space: nowrap;
+      min-width: 150px;
     }
   }
 
@@ -110,5 +115,28 @@ $color: #000;
       flex: 1;
       text-decoration: none;
     }
+  }
+}
+
+@media (max-width: 900px) {
+  p {
+    display: none;
+  }
+
+  .lower-buttons {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 440px) {
+  .toolbar .toolbar-top .contact {
+    display: none;
+  }
+
+  .toolbar .toolbar-top a img {
+    width: 290px;
+  }
+  .toolbar .toolbar-top .search-field {
+    min-width: 150px;
   }
 }

@@ -38,25 +38,42 @@
       </mat-form-field>
 
       <button mat-flat-button class="buttons" routerLink="/profile">
-        <mat-icon>person</mat-icon>Profil
+        <mat-icon>person</mat-icon>
+        <p class="button-title">Profil</p>
       </button>
 
       <button mat-flat-button class="buttons" routerLink="/cart">
-        <mat-icon>shopping_cart</mat-icon>Kosár
+        <mat-icon>shopping_cart</mat-icon>
+        <p class="button-title">Kosár</p>
       </button>
     </div>
 
     <div class="toolbar-bottom">
-      <button mat-flat-button class="buttons" (click)="sidenav.toggle()">
-        <mat-icon>menu-icon</mat-icon>Kategóriák
+      <button
+        mat-flat-button
+        class="buttons lower-buttons"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>menu-icon</mat-icon>
+        <p class="button-title">Kategóriák</p>
       </button>
 
-      <button mat-flat-button class="buttons" routerLink="/return">
-        Visszaküldés
+      <button
+        mat-flat-button
+        class="buttons lower-buttons"
+        routerLink="/return"
+      >
+        <mat-icon>settings_backup_restore</mat-icon>
+        <p class="button-title">Visszaküldés</p>
       </button>
 
-      <button mat-flat-button class="buttons" routerLink="/our-stores">
-        Üzleteink
+      <button
+        mat-flat-button
+        class="buttons lower-buttons"
+        routerLink="/our-stores"
+      >
+        <mat-icon>store</mat-icon>
+        <p class="button-title">Üzleteink</p>
       </button>
 
       <a
@@ -64,8 +81,13 @@
         target="_blank"
         rel="noopener"
       >
-        <button mat-flat-button class="buttons" routerLink="/work-with-us">
-          Dolgozz velünk!
+        <button
+          mat-flat-button
+          class="buttons lower-buttons"
+          routerLink="/work-with-us"
+        >
+          <mat-icon>work</mat-icon>
+          <p class="button-title">Dolgozz velünk!</p>
         </button>
       </a>
     </div>
