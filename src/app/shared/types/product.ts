@@ -4,6 +4,7 @@ export interface Product {
   brand: string;
   name: string;
   imageUrl: string;
+  category: string;
   price: number;
   sizes: number[];
   selectedSize: number;
