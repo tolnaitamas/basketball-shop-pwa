@@ -3,10 +3,16 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { CartItemCardComponent } from './cart-item-card/cart-item-card.component';
 import { Product } from '../shared/types/product';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-cart-page',
-  imports: [FooterComponent, CartItemCardComponent, CommonModule],
+  imports: [
+    FooterComponent,
+    CartItemCardComponent,
+    CommonModule,
+    MatButtonModule,
+  ],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.scss',
 })

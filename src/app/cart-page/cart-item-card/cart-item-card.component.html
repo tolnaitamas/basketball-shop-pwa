@@ -1,16 +1,36 @@
-<div class="cart-item">
-  <img [src]="product.imageUrl" alt="termék" />
-  <div class="item-details">
-    <p class="item-name">
-      {{ product.name }}
-    </p>
-    <p class="item-info">Cikkszám: {{ product.id }}</p>
-  </div>
-  <p class="item-info">Mennyiség:</p>
+<mat-card class="cart-item">
+  <div class="cart-item-row">
+    <div class="cart-img">
+      <img [src]="product.imageUrl" alt="termék" />
+    </div>
 
-  <div class="item-quantity">
-    <input type="number" value="1" min="1" />
+    <div class="item-details">
+      <p class="item-name">{{ product.name }}</p>
+      <p class="item-info">Cikkszám: {{ product.id }}</p>
+    </div>
+
+    <div class="item-meta">
+      <p class="item-info">Mennyiség:</p>
+      <mat-form-field appearance="fill" class="item-quantity">
+        <input
+          matInput
+          type="number"
+          min="1"
+          [value]="quantity"
+          (input)="updateQuantity($event)"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="item-meta">
+      <p class="item-info">Összeg:</p>
+      <div class="item-price">{{ product.price * quantity }} Ft</div>
+    </div>
+
+    <div class="item-remove">
+      <button class="remove" mat-flat-button (click)="removeItem()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
-  <div class="item-price">{{ product.price }} Ft</div>
-  <button mat-flat-button><mat-icon>delete</mat-icon></button>
-</div>
+</mat-card>
