@@ -1,1 +1,61 @@
-<p>products-page works!</p>
+<div class="product-page">
+  <!-- Filter Panel -->
+  <aside class="filter-panel">
+    <h3>Szűrés</h3>
+
+    <!-- Nem szerinti szűrés -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Nem</mat-label>
+      <mat-select [(ngModel)]="filters.sex">
+        <mat-option value="">Összes</mat-option>
+        <mat-option value="Férfi">Férfi</mat-option>
+        <mat-option value="Női">Női</mat-option>
+        <mat-option value="Unisex">Unisex</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Márka szerinti szűrés -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Márka</mat-label>
+      <mat-select [(ngModel)]="filters.brand">
+        <mat-option value="">Összes</mat-option>
+        <mat-option *ngFor="let b of brands" [value]="b">{{ b }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Méretválasztó -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Méret</mat-label>
+      <mat-select multiple [(ngModel)]="filters.sizes">
+        <mat-option *ngFor="let size of sizes" [value]="size">{{
+          size
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Ár -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Max ár (Ft)</mat-label>
+      <input matInput type="number" [(ngModel)]="filters.price" />
+    </mat-form-field>
+
+    <!-- Szűrés gomb -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="full-width"
+      (click)="applyFilters()"
+    >
+      Szűrés
+    </button>
+  </aside>
+
+  <!-- Product List -->
+  <section class="product-list">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product"
+    ></app-product-card>
+  </section>
+</div>
+<app-footer></app-footer>

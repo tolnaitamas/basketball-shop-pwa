@@ -1,11 +1,139 @@
 import { Component } from '@angular/core';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { ProductCardComponent } from '../shared/product-card/product-card.component';
+import { Product } from '../shared/types/product';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products-page',
-  imports: [],
+  imports: [
+    FooterComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    ProductCardComponent,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: './products-page.component.html',
-  styleUrl: './products-page.component.scss'
+  styleUrl: './products-page.component.scss',
 })
 export class ProductsPageComponent {
+  filteredProducts: Product[] = []; // Szűrt terméklista
 
+  filters = {
+    sex: '',
+    brand: '',
+    sizes: [] as number[],
+    price: null as number | null,
+  };
+
+  sizes = Array.from({ length: 11 }, (_, i) => 35 + i); // 35-45
+  brands = ['Adidas', 'Nike', 'Jordan', 'Puma'];
+
+  applyFilters() {
+    const filteredProducts = this.products.filter((product) => {
+      const matchesSex = !this.filters.sex || product.sex === this.filters.sex;
+      const matchesBrand =
+        !this.filters.brand || product.brand === this.filters.brand;
+      const matchesSize =
+        !this.filters.sizes.length ||
+        this.filters.sizes.some((s) => product.sizes.includes(s));
+      const matchesPrice =
+        !this.filters.price || product.price <= this.filters.price;
+
+      return matchesSex && matchesBrand && matchesSize && matchesPrice;
+    });
+
+    console.log(filteredProducts);
+  }
+
+  products: Product[] = [
+    {
+      id: 1,
+      sex: 'Férfi',
+      brand: 'Jordan',
+      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
+      imageUrl: 'main-page/asd.webp',
+      price: 53999,
+      sizes: [40, 41, 45, 45.5],
+      selectedSize: 40,
+    },
+    {
+      id: 2,
+      sex: 'Férfi',
+      brand: 'Nike',
+      name: 'Nike Air Max 97 Silver Bullet',
+      imageUrl: 'main-page/asd.webp',
+      price: 74999,
+      sizes: [42, 43, 44],
+      selectedSize: 42,
+    },
+    {
+      id: 3,
+      sex: 'Női',
+      brand: 'Adidas',
+      name: 'Adidas UltraBoost 21',
+      imageUrl: 'main-page/asd.webp',
+      price: 86999,
+      sizes: [40, 41, 42, 43],
+      selectedSize: 41,
+    },
+    {
+      id: 4,
+      sex: 'Férfi',
+      brand: 'Puma',
+      name: 'Puma RS-X3',
+      imageUrl: 'main-page/asd.webp',
+      price: 59999,
+      sizes: [43, 44, 45],
+      selectedSize: 44,
+    },
+    {
+      id: 5,
+      sex: 'Férfi',
+      brand: 'Jordan',
+      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
+      imageUrl: 'main-page/asd.webp',
+      price: 53999,
+      sizes: [40, 41, 45, 45.5],
+      selectedSize: 40,
+    },
+    {
+      id: 6,
+      sex: 'Férfi',
+      brand: 'Nike',
+      name: 'Nike Air Max 97 Silver Bullet',
+      imageUrl: 'main-page/asd.webp',
+      price: 74999,
+      sizes: [42, 43, 44],
+      selectedSize: 42,
+    },
+    {
+      id: 7,
+      sex: 'Női',
+      brand: 'Adidas',
+      name: 'Adidas UltraBoost 21',
+      imageUrl: 'main-page/asd.webp',
+      price: 86999,
+      sizes: [40, 41, 42, 43],
+      selectedSize: 41,
+    },
+    {
+      id: 8,
+      sex: 'Férfi',
+      brand: 'Puma',
+      name: 'Puma RS-X3',
+      imageUrl: 'main-page/asd.webp',
+      price: 59999,
+      sizes: [43, 44, 45],
+      selectedSize: 44,
+    },
+  ];
 }

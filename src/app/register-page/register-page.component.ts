@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RegisterUser } from '../shared/types/registeruser';
 
 @Component({
   selector: 'app-register-page',
@@ -35,7 +36,6 @@ export class RegisterPageComponent {
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group(
       {
-        userType: ['private', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
@@ -45,8 +45,6 @@ export class RegisterPageComponent {
         zip: ['', Validators.required],
         city: ['', Validators.required],
         address: ['', Validators.required],
-        sameAsShipping: [true],
-        newsletter: [false],
       },
       { validators: this.passwordMatchValidator }
     );
@@ -61,11 +59,11 @@ export class RegisterPageComponent {
   onSubmit(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
+      alert('Hibás vagy hiányos adatok. Kérlek, ellenőrizd az űrlapot!');
       return;
     }
 
-    const formData = this.registerForm.value;
+    const formData: RegisterUser = this.registerForm.value;
     console.log('Regisztrációs adatok:', formData);
-    // TODO: Küldés API-hoz vagy továbbítás
   }
 }

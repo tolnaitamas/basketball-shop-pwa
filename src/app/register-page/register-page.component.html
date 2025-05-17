@@ -69,13 +69,13 @@
     <div class="form-section">
       <h3>SZÁMLÁZÁSI ADATOK</h3>
 
-      <mat-checkbox formControlName="sameAsShipping">
+      <mat-checkbox>
         <p class="policy-text">
           A szállítási adatok megegyeznek a számlázási adatokkal.
         </p>
       </mat-checkbox>
 
-      <mat-checkbox formControlName="newsletter">
+      <mat-checkbox>
         <p class="policy-text">Feliratkozom a webáruház hírlevelére.</p>
       </mat-checkbox>
 
@@ -92,6 +92,7 @@
         color="primary"
         class="submit-btn"
         type="submit"
+        (click)="onSubmit()"
       >
         Regisztráció <mat-icon>edit</mat-icon>
       </button>
