@@ -1,12 +1,46 @@
+$footer-bg: #e3e3e3;
+$footer-text: #000;
+$footer-padding-v: 4vh;
+$footer-padding-h: 6vw;
+$footer-gap: 2rem;
+$footer-font-size: 0.95rem;
+$footer-title-size: 1.2rem;
+$social-icon-size: 1.2rem;
+$payment-icon-height: 28px;
+
+@mixin link-style {
+  color: $footer-text;
+  text-decoration: none;
+  display: block;
+  margin: 0.25rem 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin flex-center($gap: 1rem) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $gap;
+}
+
+%footer-text {
+  color: $footer-text;
+  font-size: $footer-font-size;
+}
+
 .footer {
-  background-color: #e3e3e3;
-  padding: 4vh 6vw;
+  background-color: $footer-bg;
+  padding: $footer-padding-v $footer-padding-h;
 
   .footer-columns {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: $footer-gap;
     margin-bottom: 3vh;
   }
 
@@ -14,22 +48,18 @@
     flex: 1 1 250px;
 
     h3 {
-      font-size: 1.2rem;
+      font-size: $footer-title-size;
       margin-bottom: 1rem;
       font-weight: bold;
     }
 
     a,
     p {
-      display: block;
-      color: #000;
-      text-decoration: none;
-      margin: 0.25rem 0;
-      font-size: 0.95rem;
+      @extend %footer-text;
     }
 
-    a:hover {
-      text-decoration: underline;
+    a {
+      @include link-style;
     }
   }
 
@@ -39,20 +69,16 @@
     margin-top: 1rem;
 
     a {
-      font-size: 1.2rem;
-      color: #000;
+      font-size: $social-icon-size;
+      color: $footer-text;
     }
   }
 
   .footer-payment {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    @include flex-center(1.5rem);
 
     img {
-      height: 28px;
+      height: $payment-icon-height;
     }
   }
 }

@@ -1,38 +1,61 @@
+$primary-bg: #262324;
+$text-light: #ffffff;
+$text-size: 1rem;
+$subtitle-size: 1.5rem;
+$hover-scale: 1.025;
+$transition-speed: 0.3s;
+
+@mixin card-transition {
+  transition: transform $transition-speed ease-in-out;
+}
+
+@mixin hover-scale($scale) {
+  &:hover,
+  &:focus {
+    transform: scale($scale);
+  }
+}
+
+@mixin title-style {
+  color: $text-light;
+  font-weight: bold;
+  font-size: $text-size;
+  height: 8vh;
+}
+
+%common-card-text {
+  color: $text-light;
+}
+
 .card {
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-
-  background-color: #262324;
+  background-color: $primary-bg;
   width: 300px;
   height: 550px;
   margin: 1rem auto;
   padding: 1rem;
 
-  &:hover,
-  &:focus {
-    transform: scale(1.025);
+  @include card-transition;
+  @include hover-scale($hover-scale);
+
+  .image {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
   }
-}
 
-.image {
-  width: 100%;
-  height: auto;
-}
+  .sizes {
+    width: 1vw;
+  }
 
-.sizes {
-  width: 1vw;
-  margin-bottom: 1rem;
-}
+  mat-card-title {
+    @include title-style;
+    @extend %common-card-text;
+  }
 
-mat-card-title {
-  height: 8vh;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-mat-card-subtitle {
-  color: white;
-  margin-bottom: 15px;
-  font-size: 1.5rem;
+  mat-card-subtitle {
+    @extend %common-card-text;
+    margin-bottom: 15px;
+    font-size: $subtitle-size;
+  }
 }

@@ -1,66 +1,95 @@
-// cart.component.scss
+$gap-base: 2rem;
+$padding-base: 2rem;
+$margin-horizontal: 10%;
+$breakpoint-lg: 992px;
+$breakpoint-sm: 600px;
+
+$bg-white: #fff;
+$box-shadow-light: 0 2px 6px rgba(0, 0, 0, 0.1);
+$font-color-dark: #444;
+$font-color-black: #000;
+$font-color-hover: #222;
+
+$border-radius-base: 0.5rem;
+$transition-base: 0.3s;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+}
+
+%flex-center-between {
+  display: flex;
+  justify-content: space-between;
+}
 
 .cart-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
-  margin: 0 10%;
+  gap: $gap-base;
+  padding: $padding-base;
+  margin: 0 $margin-horizontal;
 
-  @media (min-width: 992px) {
+  @include respond-to(lg) {
     flex-direction: row;
     align-items: flex-start;
   }
 
-  @media (max-width: 600px) {
+  @include respond-to(sm) {
     margin: auto;
   }
 }
 
 .cart-left {
   flex: 1;
-}
 
-.cart-left h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .cart-actions {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
-}
 
-.cart-actions button {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+  button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
 }
 
 .cart-summary {
   width: 100%;
   max-width: 320px;
-  background: #fff;
+  background: $bg-white;
   padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius-base;
+  box-shadow: $box-shadow-light;
 
-  @media (max-width: 600px) {
+  @include respond-to(sm) {
     margin: auto;
     max-width: 90%;
   }
-}
 
-.cart-summary h3 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
 }
 
 .summary-row {
-  display: flex;
-  justify-content: space-between;
+  @extend %flex-center-between;
   margin-bottom: 0.5rem;
 }
 
@@ -69,16 +98,15 @@
   list-style: none;
   padding: 0;
   font-size: 0.9rem;
-  color: #444;
-}
+  color: $font-color-dark;
 
-.shipping-options li {
-  margin-bottom: 0.5rem;
+  li {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .summary-total {
-  display: flex;
-  justify-content: space-between;
+  @extend %flex-center-between;
   font-weight: bold;
   margin-top: 1rem;
   font-size: 1.1rem;
@@ -88,29 +116,29 @@
   display: flex;
   margin-top: 1rem;
   gap: 0.5rem;
-}
 
-.coupon-code input {
-  flex: 1;
-  padding: 0.5rem;
-}
+  input {
+    flex: 1;
+    padding: 0.5rem;
+  }
 
-.coupon-code button {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+  button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
 }
 
 .order-button {
   width: 100%;
-  background: #000;
+  background: $font-color-black;
   padding: 0.75rem;
   margin-top: 1.5rem;
   font-weight: bold;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
-}
+  transition: background $transition-base;
 
-.order-button:hover {
-  background: #222;
+  &:hover {
+    background: $font-color-hover;
+  }
 }

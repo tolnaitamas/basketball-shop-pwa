@@ -1,16 +1,42 @@
-.slider-wrapper {
-  margin-top: 10px;
-  margin-left: 10vw;
-  width: 80%;
-  overflow: hidden;
+$gap-base: 2rem;
+$gap-feature: 8vw;
+$color-text: #000;
+$color-player-name: #333;
+$border-radius: 8px;
+$transition-base: 0.3s ease-in-out;
+$slider-transition: transform 1s ease-in-out;
+$breakpoint-sm: 768px;
+$padding-base: 1rem;
+$product-list-gap-lg: 60px;
+$product-list-gap-sm: 20px;
+$player-img-height-lg: 30vh;
+$player-img-height-sm: 150px;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+}
+
+%flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.slider-wrapper {
+  margin-top: 10px;
+  margin-left: 10vw;
+  width: 80%;
+  overflow: hidden;
+  @extend %flex-center;
+}
+
 .slider-track {
   display: flex;
-  transition: transform 1s ease-in-out;
+  transition: $slider-transition;
   width: 100%;
 }
 
@@ -23,15 +49,14 @@
 }
 
 .features {
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+  margin: 2vh 0;
   display: flex;
-  gap: 8vw;
+  gap: $gap-feature;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   font-size: 1.8vh;
-  color: #000;
+  color: $color-text;
 
   p {
     margin: 0;
@@ -44,30 +69,28 @@
 }
 
 .players {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %flex-center;
   flex-wrap: wrap;
-  gap: 2rem;
-  padding: 1rem;
+  gap: $gap-base;
+  padding: $padding-base;
 }
 
 .player {
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: transform $transition-base;
 
   img {
-    height: 30vh;
+    height: $player-img-height-lg;
     width: auto;
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out;
+    border-radius: $border-radius;
+    transition: transform $transition-base;
   }
 
   .player-name {
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: #333;
+    color: $color-player-name;
     font-weight: bold;
   }
 
@@ -76,9 +99,9 @@
     transform: scale(1.05);
   }
 
-  @media (max-width: 768px) {
+  @include respond-to(sm) {
     img {
-      height: 150px;
+      height: $player-img-height-sm;
     }
   }
 }
@@ -87,20 +110,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
-  padding: 1rem;
+  gap: $product-list-gap-sm;
+  padding: $padding-base;
   margin: auto 10vw;
 
   @media (max-width: 1615px) {
     justify-content: center;
-    gap: 60px;
+    gap: $product-list-gap-lg;
   }
 }
 
 .top-products {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %flex-center;
   height: 10vh;
 
   h2 {

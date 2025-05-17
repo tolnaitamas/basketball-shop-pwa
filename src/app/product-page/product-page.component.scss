@@ -1,11 +1,35 @@
 $product-title-color: #1a1a1a;
 $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+$padding-base: 2rem;
+$border-radius: 8px;
+$gray-color: gray;
+$breakpoint-md: 992px;
+$breakpoint-sm: 600px;
+$btn-active-bg: #1a1a1a;
+$btn-active-color: #fff;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == md {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+}
+
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .product-detail {
   margin: 0 auto;
-
   width: 80%;
-  padding: 2rem;
+  padding: $padding-base;
 
   .product-title {
     font-size: 2rem;
@@ -15,29 +39,32 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   .product-id {
     font-size: 0.9rem;
-    color: gray;
+    color: $gray-color;
     margin-bottom: 2rem;
   }
 
   .product-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $padding-base;
     box-shadow: $shadow;
-    padding: 2rem;
-    border-radius: 8px;
+    padding: $padding-base;
+    border-radius: $border-radius;
     background-color: #fff;
 
-    .product-image img {
-      width: 100%;
-      max-height: 250px;
-      object-fit: contain;
+    .product-image {
+      img {
+        width: 100%;
+        max-height: 250px;
+        object-fit: contain;
+      }
     }
 
     .product-info {
       padding-left: 25px;
       border-left: 1px solid #ddd;
       border-right: 1px solid #ddd;
+
       p {
         margin: 0.5rem 0;
       }
@@ -53,9 +80,11 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         flex-wrap: wrap;
         gap: 0.5rem;
 
-        button.active {
-          background-color: #1a1a1a;
-          color: #fff;
+        button {
+          &.active {
+            background-color: $btn-active-bg;
+            color: $btn-active-color;
+          }
         }
       }
 
@@ -65,9 +94,9 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
   }
 
-  @media (max-width: 992px) {
+  @include respond-to(md) {
     .product-container {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
 
       .product-actions {
         grid-column: span 2;
@@ -77,7 +106,7 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
   }
 
-  @media (max-width: 600px) {
+  @include respond-to(sm) {
     .product-container {
       grid-template-columns: 1fr;
 
@@ -104,9 +133,7 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .maybe-products {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %flex-center;
   height: 10vh;
 
   h2 {

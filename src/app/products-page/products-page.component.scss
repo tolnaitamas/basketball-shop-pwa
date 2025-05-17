@@ -1,32 +1,64 @@
+$primary-bg: #fff;
+$border-radius: 8px;
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+$padding-base: 2rem;
+$padding-filter: 1.5rem;
+$gap-base: 2rem;
+$gap-product: 1rem;
+
+$breakpoint-lg: 1575px;
+$breakpoint-md: 970px;
+$breakpoint-sm: 670px;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == lg {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+}
+
+%full-width {
+  width: 100%;
+}
+
 .product-page {
   display: grid;
   grid-template-columns: 250px 1fr;
-  gap: 2rem;
-  padding: 2rem;
+  gap: $gap-base;
+  padding: $padding-base;
 
   .filter-panel {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: $primary-bg;
+    border-radius: $border-radius;
+    padding: $padding-filter;
+    box-shadow: $box-shadow;
 
     .filter-field {
-      width: 100%;
+      @extend %full-width;
       margin-bottom: 1rem;
     }
 
     .full-width {
-      width: 100%;
+      @extend %full-width;
     }
   }
 
   .product-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    gap: $gap-product;
   }
 
-  @media (max-width: 1575px) {
+  @include respond-to(lg) {
     grid-template-columns: 1fr;
 
     .filter-panel {
@@ -40,12 +72,13 @@
     }
   }
 
-  @media (max-width: 970px) {
+  @include respond-to(md) {
     .product-list {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media (max-width: 670px) {
+
+  @include respond-to(sm) {
     .product-list {
       grid-template-columns: 1fr;
     }

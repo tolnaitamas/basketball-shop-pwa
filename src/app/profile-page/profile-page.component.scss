@@ -1,38 +1,67 @@
+$bg-white: #fff;
+$text-dark: #000;
+$text-header: #1a1a1a;
+$box-shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.2);
+$box-shadow-button: 0 4px 10px rgba(0, 0, 0, 0.2);
+$font-size-base: 1rem;
+$font-size-small: 0.85rem;
+$font-size-heading: 2rem;
+$max-width: 500px;
+$breakpoint-sm: 600px;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-style {
+  @include flex-center;
+  min-height: 48px;
+  box-shadow: $box-shadow-button;
+}
+
+@mixin title-style {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+%text-dark {
+  color: $text-dark;
+}
+
 .modal-header {
   margin-bottom: 1.5rem;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: $font-size-heading;
   text-align: center;
 }
 
 .register-container {
   width: 90vw;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  z-index: 1000;
-  max-width: 500px;
+  max-width: $max-width;
   margin: 20px auto;
   padding: 2rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: $bg-white;
+  box-shadow: $box-shadow-strong;
+  z-index: 1000;
+  @include flex-center;
+  flex-direction: column;
 
   .section-title {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 0.5rem;
+    @include title-style;
   }
 
   .form-section {
     margin-bottom: 2rem;
 
     h3 {
-      font-size: 1rem;
+      font-size: $font-size-base;
       font-weight: 600;
       margin-bottom: 1rem;
       text-transform: uppercase;
-      color: #1a1a1a;
+      color: $text-header;
     }
   }
 
@@ -55,19 +84,16 @@
     text-align: right;
 
     .submit-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 48px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      @include button-style;
     }
   }
 
   .policy-text {
-    font-size: 0.85rem;
+    font-size: $font-size-small;
+
     a {
       font-weight: bold;
-      color: #000;
+      color: $text-dark;
       text-decoration: none;
 
       &:hover {
@@ -77,11 +103,11 @@
   }
 
   p {
-    color: #000;
+    @extend %text-dark;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: $breakpoint-sm) {
   .register-container {
     padding: 1rem;
 
@@ -95,7 +121,7 @@
       .submit-btn {
         width: 100%;
         height: 52px;
-        font-size: 1rem;
+        font-size: $font-size-base;
       }
     }
   }
