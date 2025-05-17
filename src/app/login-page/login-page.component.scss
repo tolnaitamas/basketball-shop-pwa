@@ -1,15 +1,11 @@
 .user-modal {
-  top: 0;
-  left: 0;
-  width: 90vw;
-  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #fff;
   z-index: 1000;
   padding: 1rem;
-
+  margin: 30px;
   .user-modal-content {
     background: #fff;
     padding: 2rem;
@@ -20,9 +16,9 @@
     position: relative;
 
     .modal-header {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       font-weight: bold;
-      font-size: 1.4rem;
+      font-size: 2rem;
       text-align: center;
     }
 
@@ -41,7 +37,6 @@
       button {
         flex: 1;
         background-color: #000;
-        color: #fff;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
         .arrow {

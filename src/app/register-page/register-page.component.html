@@ -1,25 +1,22 @@
 <div class="register-container">
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <mat-radio-group class="radio-group" formControlName="userType">
-      <label class="section-title">Felhasználó típusa</label>
-      <mat-radio-button value="company">Cég</mat-radio-button>
-      <mat-radio-button value="private">Magánszemély</mat-radio-button>
-    </mat-radio-group>
-
+    <div class="modal-header">
+      <h3>REGISZTRÁCIÓ</h3>
+    </div>
     <!-- REGISZTRÁCIÓS ADATOK -->
     <div class="form-section">
       <h3>REGISZTRÁCIÓS ADATOK</h3>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
 
       <div class="row">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Jelszó</mat-label>
           <input matInput type="password" formControlName="password" />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Írja be ismét a jelszót</mat-label>
           <input matInput type="password" formControlName="confirmPassword" />
         </mat-form-field>
@@ -29,9 +26,8 @@
     <!-- KAPCSOLATTARTÓ ADATOK -->
     <div class="form-section">
       <h3>KAPCSOLATTARTÓ ADATOK</h3>
-      <mat-form-field appearance="outline" class="half-width">
+      <mat-form-field appearance="fill" class="half-width">
         <mat-label>Előhívó Mobilszám</mat-label>
-        <div matPrefix>+36&nbsp;</div>
         <input matInput formControlName="phone" />
       </mat-form-field>
     </div>
@@ -39,12 +35,12 @@
     <!-- SZÁLLÍTÁSI ADATOK -->
     <div class="form-section">
       <h3>SZÁLLÍTÁSI ADATOK</h3>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Név</mat-label>
         <input matInput formControlName="name" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Ország</mat-label>
         <mat-select formControlName="country">
           <mat-option value="hu">Magyarország</mat-option>
@@ -53,17 +49,17 @@
       </mat-form-field>
 
       <div class="row">
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Irányítószám</mat-label>
           <input matInput formControlName="zip" />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="half-width">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Település</mat-label>
           <input matInput formControlName="city" />
         </mat-form-field>
       </div>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Utca, házszám</mat-label>
         <input matInput formControlName="address" />
       </mat-form-field>
@@ -74,11 +70,13 @@
       <h3>SZÁMLÁZÁSI ADATOK</h3>
 
       <mat-checkbox formControlName="sameAsShipping">
-        A szállítási adatok megegyeznek a számlázási adatokkal.
+        <p class="policy-text">
+          A szállítási adatok megegyeznek a számlázási adatokkal.
+        </p>
       </mat-checkbox>
 
       <mat-checkbox formControlName="newsletter">
-        Feliratkozom a webáruház hírlevelére.
+        <p class="policy-text">Feliratkozom a webáruház hírlevelére.</p>
       </mat-checkbox>
 
       <p class="policy-text">
@@ -89,7 +87,12 @@
 
     <!-- GOMB -->
     <div class="button-wrapper">
-      <button mat-flat-button color="primary" class="submit-btn" type="submit">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        type="submit"
+      >
         Regisztráció <mat-icon>edit</mat-icon>
       </button>
     </div>
