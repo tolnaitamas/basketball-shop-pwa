@@ -3,6 +3,16 @@
   <aside class="filter-panel">
     <h3>Szűrés</h3>
 
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Rendezés</mat-label>
+      <mat-select [(ngModel)]="filters.sortBy">
+        <mat-option value="">Alapértelmezett</mat-option>
+        <mat-option value="nameAsc">Név szerint (A-Z)</mat-option>
+        <mat-option value="nameDesc">Név szerint (Z-A)</mat-option>
+        <mat-option value="priceAsc">Ár szerint (növekvő)</mat-option>
+        <mat-option value="priceDesc">Ár szerint (csökkenő)</mat-option>
+      </mat-select>
+    </mat-form-field>
     <!-- Nem szerinti szűrés -->
     <mat-form-field appearance="fill" class="filter-field">
       <mat-label>Nem</mat-label>

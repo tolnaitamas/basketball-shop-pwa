@@ -32,6 +32,7 @@ export class ProductsPageComponent {
     brand: '',
     sizes: [] as number[],
     price: null as number | null,
+    sortBy: '',
   };
 
   sizes = Array.from({ length: 11 }, (_, i) => 35 + i); // 35-45
@@ -50,6 +51,21 @@ export class ProductsPageComponent {
 
       return matchesSex && matchesBrand && matchesSize && matchesPrice;
     });
+
+    switch (this.filters.sortBy) {
+      case 'nameAsc':
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'nameDesc':
+        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'priceAsc':
+        filteredProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'priceDesc':
+        filteredProducts.sort((a, b) => b.price - a.price);
+        break;
+    }
 
     console.log(filteredProducts);
   }
