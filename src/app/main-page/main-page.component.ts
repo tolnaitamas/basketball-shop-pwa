@@ -43,6 +43,7 @@ export class MainPageComponent {
       price: 53999,
       sizes: [40, 41, 45, 45.5],
       selectedSize: 40,
+      quantity: 1,
     },
     {
       id: 2,
@@ -54,6 +55,7 @@ export class MainPageComponent {
       price: 74999,
       sizes: [42, 43, 44],
       selectedSize: 42,
+      quantity: 1,
     },
     {
       id: 3,
@@ -65,6 +67,7 @@ export class MainPageComponent {
       price: 86999,
       sizes: [40, 41, 42, 43],
       selectedSize: 41,
+      quantity: 1,
     },
     {
       id: 4,
@@ -76,6 +79,7 @@ export class MainPageComponent {
       price: 59999,
       sizes: [43, 44, 45],
       selectedSize: 44,
+      quantity: 1,
     },
   ];
 }

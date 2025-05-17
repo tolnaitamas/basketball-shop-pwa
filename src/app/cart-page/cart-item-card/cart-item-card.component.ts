@@ -36,11 +36,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class CartItemCardComponent {
   @Input() product!: Product;
 
-  quantity: number = 1;
-
   updateQuantity(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.quantity = Number(value);
+    this.product.quantity = Number(value);
     // Esetleg értesíthetjük a szülő komponenst a változásról
   }
 
