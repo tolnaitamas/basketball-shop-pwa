@@ -1,0 +1,15 @@
+<div class="cart-item">
+  <img [src]="product.imageUrl" alt="termék" />
+  <div class="item-details">
+    <p class="item-name">
+      {{ product.name }}
+    </p>
+    <p class="item-info">Cikkszám: {{ product.id }}</p>
+  </div>
+  <p class="item-info">Mennyiség:</p>
+
+  <div class="item-quantity">
+    <input type="number" value="1" min="1" />
+  </div>
+  <div class="item-price">{{ product.price }} Ft</div>
+</div>
