@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { Product } from '../types/product';
 import { Router } from '@angular/router';
+import { ManagementService } from '../../services/management/management.service';
 
 @Component({
   selector: 'app-product-card',
@@ -22,14 +23,15 @@ import { Router } from '@angular/router';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private managementService: ManagementService
+  ) {}
 
   @Input() product!: Product;
 
   addToCart(): void {
-    console.log(
-      `A ${this.product.name} termék hozzáadva a kosárhoz, méret: ${this.product.selectedSize}`
-    );
+    this.managementService.createProduct(this.product);
   }
 
   goToProduct(product: Product): void {
