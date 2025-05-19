@@ -4,6 +4,7 @@ import { CartItemCardComponent } from './cart-item-card/cart-item-card.component
 import { Product } from '../../shared/types/product';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { ManagementService } from '../../services/management/management.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -17,54 +18,37 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './cart-page.component.scss',
 })
 export class CartPageComponent {
-  products: Product[] = [
-    {
-      id: 1,
-      sex: 'Férfi',
-      brand: 'Jordan',
-      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
-      imageUrl: 'main-page/asd.webp',
-      category: 'clothes',
-      price: 53999,
-      sizes: [40, 41, 45, 45.5],
-      selectedSize: 40,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      sex: 'Férfi',
-      brand: 'Nike',
-      name: 'Nike Air Max 97 Silver Bullet',
-      imageUrl: 'main-page/asd.webp',
-      category: 'shoes',
-      price: 74999,
-      sizes: [42, 43, 44],
-      selectedSize: 42,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      sex: 'Női',
-      brand: 'Adidas',
-      name: 'Adidas UltraBoost 21',
-      imageUrl: 'main-page/asd.webp',
-      category: 'caps',
-      price: 86999,
-      sizes: [40, 41, 42, 43],
-      selectedSize: 41,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      sex: 'Férfi',
-      brand: 'Puma',
-      name: 'Puma RS-X3',
-      imageUrl: 'main-page/asd.webp',
-      category: 'other',
-      price: 59999,
-      sizes: [43, 44, 45],
-      selectedSize: 44,
-      quantity: 1,
-    },
-  ];
+  products: Product[] = [];
+  isEmpty = false;
+
+  constructor(public managementService: ManagementService) {}
+
+  async ngOnInit(): Promise<void> {
+    await this.getCartItems();
+  }
+
+  async ngOnChanges(): Promise<void> {
+    await this.getCartItems();
+  }
+
+  private async getCartItems(): Promise<void> {
+    try {
+      this.products = await this.managementService.loadProducts();
+      //this.totalPriceCalculation();
+      if (this.products.length > 0) {
+        this.isEmpty = false;
+      } else {
+        this.isEmpty = true;
+      }
+    } catch (error) {
+      console.error('Error loading cart items:', error);
+    }
+  }
+
+  clearCart() {
+    this.managementService.clearCart();
+    this.products = [];
+    /*this.totalPrice = 0;
+    this.isCartEmpty = true;*/
+  }
 }
