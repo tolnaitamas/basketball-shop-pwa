@@ -38,6 +38,7 @@ export class CartItemCardComponent {
   @Input() product!: Product;
 
   prize: number = 0;
+  isRemoved = false;
 
   constructor(private managementService: ManagementService) {}
 
@@ -59,8 +60,8 @@ export class CartItemCardComponent {
     this.product = await this.managementService.getProduct(this.product.id);
   }
 
-  removeItem() {
-    // Logika a tétel eltávolításához, pl. EventEmitter használata
-    console.log('Tétel eltávolítva:', this.product);
+  async removeItem() {
+    this.managementService.removeProduct(this.product.id);
+    this.isRemoved = true;
   }
 }

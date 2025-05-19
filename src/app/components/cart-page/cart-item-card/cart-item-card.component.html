@@ -1,4 +1,4 @@
-<mat-card class="cart-item">
+<mat-card class="cart-item" *ngIf="!isRemoved">
   <div class="cart-item-row">
     <div class="cart-img">
       <img [src]="product.imageUrl" alt="termék" />
