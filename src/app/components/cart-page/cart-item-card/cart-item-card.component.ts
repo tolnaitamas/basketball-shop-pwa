@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ManagementService } from '../../../services/management/management.service';
 
 @Component({
   selector: 'app-cart-item-card',
@@ -36,10 +37,26 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class CartItemCardComponent {
   @Input() product!: Product;
 
-  updateQuantity(event: Event) {
+  prize: number = 0;
+
+  constructor(private managementService: ManagementService) {}
+
+  ngOnInit() {
+    this.prize = this.product.price;
+  }
+
+  async updateQuantity(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.product.quantity = Number(value);
-    // Esetleg értesíthetjük a szülő komponenst a változásról
+    this.managementService.updateProductQuantity(
+      this.product.id,
+      Number(value)
+    );
+    this.managementService.updateProductQuantityPrice(
+      this.product.id,
+      Number(value) * this.prize
+    );
+
+    this.product = await this.managementService.getProduct(this.product.id);
   }
 
   removeItem() {

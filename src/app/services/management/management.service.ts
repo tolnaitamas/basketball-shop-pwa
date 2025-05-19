@@ -157,6 +157,31 @@ export class ManagementService {
     };
   }
 
+  // Egy termék lekérése
+  public async getProduct(id: number): Promise<Product> {
+    const transaction = this.db.transaction(this.objectStoreName, 'readonly');
+    const objectStore = transaction.objectStore(this.objectStoreName);
+
+    return new Promise((resolve, reject) => {
+      const request = objectStore.get(id);
+
+      request.onsuccess = () => {
+        const product = request.result;
+        if (product) {
+          console.log('Termék lekérve:', product);
+          resolve(product);
+        } else {
+          reject(new Error(`Nem található termék ezzel az ID-vel: ${id}`));
+        }
+      };
+
+      request.onerror = (event: any) => {
+        console.error('Hiba a termék lekérésekor:', event.target.error);
+        reject(event.target.error);
+      };
+    });
+  }
+
   // Kosár kiürítése
   public clearCart(): void {
     const transaction = this.db.transaction(this.objectStoreName, 'readwrite');
@@ -186,6 +211,23 @@ export class ManagementService {
         product.quantity = quantity;
         objectStore.put(product).onsuccess = () => {
           console.log('Termék mennyisége frissítve:', id, quantity);
+        };
+      }
+    };
+  }
+
+  // Termék árának frissítése
+  public updateProductQuantityPrice(id: number, price: number): void {
+    const transaction = this.db.transaction(this.objectStoreName, 'readwrite');
+    const objectStore = transaction.objectStore(this.objectStoreName);
+    const request = objectStore.get(id);
+
+    request.onsuccess = (event: any) => {
+      const product = event.target.result;
+      if (product) {
+        product.price = price;
+        objectStore.put(product).onsuccess = () => {
+          console.log('Termék mennyisége frissítve:', id, price);
         };
       }
     };
