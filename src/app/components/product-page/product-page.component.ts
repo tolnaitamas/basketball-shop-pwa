@@ -1,22 +1,52 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from '../shared/footer/footer.component';
-import { CartItemCardComponent } from './cart-item-card/cart-item-card.component';
-import { Product } from '../shared/types/product';
+import { Product } from '../../shared/types/product';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { FooterComponent } from '../../shared/footer/footer.component';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
 @Component({
-  selector: 'app-cart-page',
+  selector: 'app-product-page',
   imports: [
-    FooterComponent,
-    CartItemCardComponent,
     CommonModule,
+    MatListModule,
+    FooterComponent,
     MatButtonModule,
+    ProductCardComponent,
   ],
-  templateUrl: './cart-page.component.html',
-  styleUrl: './cart-page.component.scss',
+  templateUrl: './product-page.component.html',
+  styleUrl: './product-page.component.scss',
 })
-export class CartPageComponent {
+export class ProductPageComponent {
+  product: Product;
+
+  constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    this.product = navigation?.extras?.state?.['product'];
+  }
+
+  inStock = true;
+
+  ngOnInit(): void {
+    const state = history.state;
+    if (state && state.product) {
+      this.product = state.product;
+    } else {
+      // fallback logic (e.g. fetch from API based on ID param)
+    }
+  }
+
+  selectSize(size: number) {
+    this.product.selectedSize = size;
+  }
+
+  addToCart() {
+    console.log('Kosárba:', this.product);
+    // implement real cart logic here
+  }
+
   products: Product[] = [
     {
       id: 1,

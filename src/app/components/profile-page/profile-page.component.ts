@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from '../shared/footer/footer.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RegisterUser } from '../shared/types/registeruser';
+import { RegisterUser } from '../../shared/types/registeruser';
 @Component({
   selector: 'app-profile-page',
   imports: [

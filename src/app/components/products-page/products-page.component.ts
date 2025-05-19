@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from '../shared/footer/footer.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductCardComponent } from '../shared/product-card/product-card.component';
-import { Product } from '../shared/types/product';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
+import { Product } from '../../shared/types/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
