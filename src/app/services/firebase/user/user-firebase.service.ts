@@ -3,18 +3,30 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   EmailAuthProvider,
+  onAuthStateChanged,
   reauthenticateWithCredential,
   updatePassword,
+  User,
+  UserProfile,
 } from '@angular/fire/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { RegisterUser } from '../../../shared/types/registeruser';
 import { DbUser } from '../../../shared/types/dbUser';
+import { Observable, switchMap, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserFirebaseService {
-  constructor(private firestore: Firestore, private auth: Auth) {}
+  currentUser$: Observable<User | null>;
+
+  constructor(private firestore: Firestore, private auth: Auth) {
+    this.currentUser$ = new Observable((observer) => {
+      onAuthStateChanged(this.auth, (user) => {
+        observer.next(user);
+      });
+    });
+  }
 
   async registerUser(formData: RegisterUser): Promise<void> {
     try {
@@ -67,5 +79,18 @@ export class UserFirebaseService {
     } catch (error) {
       return Promise.reject(error);
     }
+  }
+
+  getUserProfile(): Observable<UserProfile | null> {
+    return this.currentUser$.pipe(
+      switchMap((user) => {
+        if (user) {
+          const userDocRef = doc(this.firestore, `users/${user.uid}`);
+          return docData(userDocRef) as Observable<UserProfile>;
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
 }

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterUser } from '../../shared/types/registeruser';
 import { AuthFirebaseService } from '../../services/firebase/authorization/auth-firebase.service';
+import { UserFirebaseService } from '../../services/firebase/user/user-firebase.service';
 @Component({
   selector: 'app-profile-page',
   imports: [
@@ -33,39 +34,49 @@ import { AuthFirebaseService } from '../../services/firebase/authorization/auth-
 export class ProfilePageComponent {
   registerForm: FormGroup;
 
-  newUser: RegisterUser = {
-    email: 'example@example.com',
-    password: '',
-    confirmPassword: '',
-    phone: '123456789',
-    name: 'Kiss Péter',
-    country: 'Magyarország',
-    zip: '1051',
-    city: 'Budapest',
-    address: 'Bajcsy-Zsilinszky út 1.',
-  };
-
   constructor(
     private fb: FormBuilder,
-    private authServeice: AuthFirebaseService
+    private authService: AuthFirebaseService,
+    private userService: UserFirebaseService
   ) {
     this.registerForm = this.fb.group(
       {
-        email: [this.newUser.email, [Validators.required, Validators.email]],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
-        phone: [
-          this.newUser.phone,
-          [Validators.required, Validators.pattern('^[0-9]{9}$')],
-        ],
-        name: [this.newUser.name, Validators.required],
+        phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+        name: ['', Validators.required],
         country: ['hu', Validators.required],
-        zip: [this.newUser.zip, Validators.required],
-        city: [this.newUser.city, Validators.required],
-        address: [this.newUser.address, Validators.required],
+        zip: ['', Validators.required],
+        city: ['', Validators.required],
+        address: ['', Validators.required],
       },
       { validators: this.passwordMatchValidator }
     );
+  }
+
+  ngOnInit() {
+    this.userService.getUserProfile().subscribe((user) => {
+      if (user) {
+        this.registerForm = this.fb.group(
+          {
+            email: [user['email'], [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            confirmPassword: ['', [Validators.required]],
+            phone: [
+              user['phone'],
+              [Validators.required, Validators.pattern('^[0-9]{9}$')],
+            ],
+            name: [user['name'], Validators.required],
+            country: ['hu', Validators.required],
+            zip: [user['zip'], Validators.required],
+            city: [user['city'], Validators.required],
+            address: [user['address'], Validators.required],
+          },
+          { validators: this.passwordMatchValidator }
+        );
+      }
+    });
   }
 
   passwordMatchValidator(group: FormGroup) {
@@ -86,9 +97,9 @@ export class ProfilePageComponent {
   }
 
   logout() {
-    this.authServeice.logout();
+    this.authService.logout();
   }
   delete() {
-    this.authServeice.logout();
+    this.authService.logout();
   }
 }

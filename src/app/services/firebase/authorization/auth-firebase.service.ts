@@ -17,29 +17,12 @@ import { Observable, switchMap, of, map } from 'rxjs';
 export class AuthFirebaseService {
   currentUser$: Observable<User | null>;
 
-  constructor(
-    private auth: Auth,
-    private router: Router,
-    private firestore: Firestore
-  ) {
+  constructor(private auth: Auth, private router: Router) {
     this.currentUser$ = new Observable((observer) => {
       onAuthStateChanged(this.auth, (user) => {
         observer.next(user);
       });
     });
-  }
-
-  getUserProfile(): Observable<UserProfile | null> {
-    return this.currentUser$.pipe(
-      switchMap((user) => {
-        if (user) {
-          const userDocRef = doc(this.firestore, `users/${user.uid}`);
-          return docData(userDocRef) as Observable<UserProfile>;
-        } else {
-          return of(null);
-        }
-      })
-    );
   }
 
   login(email: string, password: string): Promise<UserCredential> {
