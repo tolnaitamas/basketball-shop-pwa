@@ -4,7 +4,7 @@
       <h3>BELÉPÉS</h3>
     </div>
 
-    <form [formGroup]="userForm">
+    <form [formGroup]="userForm" (ngSubmit)="login()">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="email" type="email" required />
@@ -20,8 +20,7 @@
           mat-raised-button
           color="primary"
           class="login-button"
-          type="button"
-          (click)="login()"
+          type="submit"
         >
           Belép <span class="arrow">→</span>
         </button>

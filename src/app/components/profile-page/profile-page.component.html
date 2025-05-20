@@ -14,12 +14,12 @@
 
       <div class="row">
         <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Jelszó</mat-label>
-          <input matInput type="password" formControlName="password" />
+          <mat-label> Régi jelszó</mat-label>
+          <input matInput type="password" formControlName="currentPassword" />
         </mat-form-field>
         <mat-form-field appearance="fill" class="half-width">
-          <mat-label>Írja be ismét a jelszót</mat-label>
-          <input matInput type="password" formControlName="confirmPassword" />
+          <mat-label>Új jelszó</mat-label>
+          <input matInput type="password" formControlName="newPassword" />
         </mat-form-field>
       </div>
     </div>
@@ -73,7 +73,7 @@
         color="primary"
         class="submit-btn"
         type="button"
-        (click)="onSubmit()"
+        (click)="update()"
       >
         Módosítás <mat-icon>edit</mat-icon>
       </button>

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterUser } from '../../shared/types/registeruser';
 import { UserFirebaseService } from '../../services/firebase/user/user-firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -36,7 +37,8 @@ export class RegisterPageComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserFirebaseService
+    private userService: UserFirebaseService,
+    private router: Router
   ) {
     this.registerForm = this.fb.group(
       {
@@ -72,7 +74,7 @@ export class RegisterPageComponent {
 
     this.userService
       .registerUser(formData)
-      .then(() => alert('Sikeres regisztráció!'))
+      .then(() => this.router.navigate(['/profile']))
       .catch((error) => alert(`Hiba a regisztráció során: ${error.message}`));
   }
 }

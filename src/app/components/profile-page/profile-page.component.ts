@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RegisterUser } from '../../shared/types/registeruser';
 import { AuthFirebaseService } from '../../services/firebase/authorization/auth-firebase.service';
 import { UserFirebaseService } from '../../services/firebase/user/user-firebase.service';
+import { Auth, deleteUser } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile-page',
   imports: [
@@ -37,69 +39,70 @@ export class ProfilePageComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthFirebaseService,
-    private userService: UserFirebaseService
+    private userService: UserFirebaseService,
+    private auth: Auth,
+    private router: Router
   ) {
-    this.registerForm = this.fb.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
-        phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
-        name: ['', Validators.required],
-        country: ['hu', Validators.required],
-        zip: ['', Validators.required],
-        city: ['', Validators.required],
-        address: ['', Validators.required],
-      },
-      { validators: this.passwordMatchValidator }
-    );
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      currentPassword: ['', [Validators.required, Validators.minLength(6)]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      name: ['', Validators.required],
+      country: ['hu', Validators.required],
+      zip: ['', Validators.required],
+      city: ['', Validators.required],
+      address: ['', Validators.required],
+    });
   }
 
   ngOnInit() {
     this.userService.getUserProfile().subscribe((user) => {
       if (user) {
-        this.registerForm = this.fb.group(
-          {
-            email: [user['email'], [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            confirmPassword: ['', [Validators.required]],
-            phone: [
-              user['phone'],
-              [Validators.required, Validators.pattern('^[0-9]{9}$')],
-            ],
-            name: [user['name'], Validators.required],
-            country: ['hu', Validators.required],
-            zip: [user['zip'], Validators.required],
-            city: [user['city'], Validators.required],
-            address: [user['address'], Validators.required],
-          },
-          { validators: this.passwordMatchValidator }
-        );
+        this.registerForm = this.fb.group({
+          email: [user['email'], [Validators.required, Validators.email]],
+          currentPassword: ['', [Validators.required, Validators.minLength(6)]],
+          newPassword: ['', [Validators.required, Validators.minLength(6)]],
+          phone: [
+            user['phone'],
+            [Validators.required, Validators.pattern('^[0-9]{9}$')],
+          ],
+          name: [user['name'], Validators.required],
+          country: ['hu', Validators.required],
+          zip: [user['zip'], Validators.required],
+          city: [user['city'], Validators.required],
+          address: [user['address'], Validators.required],
+        });
       }
     });
   }
 
-  passwordMatchValidator(group: FormGroup) {
-    const pass = group.get('password')?.value;
-    const confirm = group.get('confirmPassword')?.value;
-    return pass === confirm ? null : { mismatch: true };
-  }
-
-  onSubmit(): void {
+  update(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       alert('Hibás vagy hiányos adatok. Kérlek, ellenőrizd az űrlapot!');
       return;
     }
 
-    const formData: RegisterUser = this.registerForm.value;
-    console.log('Regisztrációs adatok:', formData);
+    this.userService.updateUser(this.registerForm);
+
+    console.log('Sikeresen frissítve!');
+    this.router.navigate(['/profile']);
   }
 
   logout() {
     this.authService.logout();
   }
-  delete() {
-    this.authService.logout();
+
+  async delete() {
+    await this.userService.deleteUser(this.getCurrentUserId());
+    await this.authService.deleteCurrentUser();
+
+    this.router.navigate(['/main']);
+  }
+
+  getCurrentUserId(): string {
+    const user = this.auth.currentUser;
+    return user ? user.uid : '';
   }
 }
