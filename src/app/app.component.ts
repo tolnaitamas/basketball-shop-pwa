@@ -13,6 +13,7 @@ import { ProductQuantityService } from './services/cart/product-quantity.service
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     MatSidenavModule,
     RouterOutlet,

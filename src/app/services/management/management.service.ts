@@ -82,11 +82,11 @@ export class ManagementService {
 
     request.onsuccess = async (event: any) => {
       const existingProduct = event.target.result;
-      this.productQuantityService.setQuantity(
-        this.productQuantityService.getQuantity() + 1
-      );
 
       if (existingProduct) {
+        this.productQuantityService.setQuantity(
+          this.productQuantityService.getQuantity() + 1
+        );
         existingProduct.quantity = (existingProduct.quantity || 0) + 1;
         objectStore.put(existingProduct);
       } else {
@@ -119,11 +119,18 @@ export class ManagementService {
 
     request.onsuccess = async (event: any) => {
       const product = event.target.result;
-      this.productQuantityService.setQuantity(
-        this.productQuantityService.getQuantity() + 1
-      );
+
       if (product) {
         product.quantity = quantity;
+        if (product.quantity < quantity) {
+          this.productQuantityService.setQuantity(
+            this.productQuantityService.getQuantity() + 1
+          );
+        } else {
+          this.productQuantityService.setQuantity(
+            this.productQuantityService.getQuantity() - 1
+          );
+        }
         objectStore.put(product);
         await this.loadProducts();
       }
