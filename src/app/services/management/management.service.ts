@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../../shared/types/product';
+import { ProductQuantityService } from '../cart/product-quantity.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class ManagementService {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   public products$ = this.productsSubject.asObservable();
 
-  constructor() {
+  constructor(private productQuantityService: ProductQuantityService) {
     this.dbReady = this.initDB();
   }
 
@@ -81,12 +82,19 @@ export class ManagementService {
 
     request.onsuccess = async (event: any) => {
       const existingProduct = event.target.result;
+      this.productQuantityService.setQuantity(
+        this.productQuantityService.getQuantity() + 1
+      );
 
       if (existingProduct) {
         existingProduct.quantity = (existingProduct.quantity || 0) + 1;
         objectStore.put(existingProduct);
       } else {
         const newProduct = { ...product, quantity: 1 };
+        this.productQuantityService.setQuantity(
+          this.productQuantityService.getQuantity() + 1
+        );
+
         objectStore.add(newProduct);
       }
 
@@ -111,6 +119,9 @@ export class ManagementService {
 
     request.onsuccess = async (event: any) => {
       const product = event.target.result;
+      this.productQuantityService.setQuantity(
+        this.productQuantityService.getQuantity() + 1
+      );
       if (product) {
         product.quantity = quantity;
         objectStore.put(product);
@@ -148,6 +159,9 @@ export class ManagementService {
     const objectStore = transaction.objectStore(this.objectStoreName);
 
     objectStore.delete(id).onsuccess = async () => {
+      this.productQuantityService.setQuantity(
+        this.productQuantityService.getQuantity() - 1
+      );
       await this.loadProducts();
     };
   }
@@ -160,6 +174,7 @@ export class ManagementService {
     const objectStore = transaction.objectStore(this.objectStoreName);
 
     objectStore.clear().onsuccess = async () => {
+      this.productQuantityService.setQuantity(0);
       await this.loadProducts();
     };
   }
@@ -186,11 +201,5 @@ export class ManagementService {
         reject(event.target.error);
       };
     });
-  }
-
-  // ----- Termékek számának lekérdezése -----
-  public getProductCount(): number {
-    const products = this.productsSubject.getValue();
-    return products.reduce((sum, p) => sum + (p.quantity || 0), 0);
   }
 }

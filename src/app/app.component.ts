@@ -7,8 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { ProductQuantityService } from './services/cart/product-quantity.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     CommonModule,
     MatSelectModule,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -33,7 +35,10 @@ export class AppComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public productQuatityService: ProductQuantityService
+  ) {}
 
   sidenavOpened = false;
 
