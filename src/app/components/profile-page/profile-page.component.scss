@@ -82,6 +82,7 @@ $breakpoint-sm: 600px;
 
   .button-wrapper {
     text-align: right;
+    margin-top: 10px;
 
     .submit-btn {
       @include button-style;

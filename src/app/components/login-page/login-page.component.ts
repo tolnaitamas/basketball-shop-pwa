@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../../shared/footer/footer.component';
+import { AuthFirebaseService } from '../../services/firebase/authorization/auth-firebase.service';
 
 @Component({
   selector: 'app-login-page',
@@ -24,7 +25,10 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 export class LoginPageComponent {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthFirebaseService
+  ) {
     this.userForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -33,11 +37,10 @@ export class LoginPageComponent {
 
   login() {
     if (this.userForm.valid) {
-      console.log('Belépés:', this.userForm.value);
+      this.authService
+        .login(this.userForm.value.email, this.userForm.value.password)
+        .then(() => alert('Sikeres bejelentkezés!'))
+        .catch((error) => alert(`Hiba: ${error.message}`));
     }
-  }
-
-  register() {
-    this.router.navigate(['/register']);
   }
 }

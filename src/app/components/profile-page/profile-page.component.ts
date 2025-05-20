@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterUser } from '../../shared/types/registeruser';
+import { AuthFirebaseService } from '../../services/firebase/authorization/auth-firebase.service';
 @Component({
   selector: 'app-profile-page',
   imports: [
@@ -44,7 +45,10 @@ export class ProfilePageComponent {
     address: 'Bajcsy-Zsilinszky út 1.',
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authServeice: AuthFirebaseService
+  ) {
     this.registerForm = this.fb.group(
       {
         email: [this.newUser.email, [Validators.required, Validators.email]],
@@ -79,5 +83,9 @@ export class ProfilePageComponent {
 
     const formData: RegisterUser = this.registerForm.value;
     console.log('Regisztrációs adatok:', formData);
+  }
+
+  logout() {
+    this.authServeice.logout();
   }
 }

@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterUser } from '../../shared/types/registeruser';
+import { UserFirebaseService } from '../../services/firebase/user/user-firebase.service';
 
 @Component({
   selector: 'app-register-page',
@@ -33,7 +34,10 @@ import { RegisterUser } from '../../shared/types/registeruser';
 export class RegisterPageComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserFirebaseService
+  ) {
     this.registerForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -65,5 +69,10 @@ export class RegisterPageComponent {
 
     const formData: RegisterUser = this.registerForm.value;
     console.log('Regisztrációs adatok:', formData);
+
+    this.userService
+      .registerUser(formData)
+      .then(() => alert('Sikeres regisztráció!'))
+      .catch((error) => alert(`Hiba a regisztráció során: ${error.message}`));
   }
 }
