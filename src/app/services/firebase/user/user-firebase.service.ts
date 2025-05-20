@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { RegisterUser } from '../../../shared/types/registeruser';
+import { DbUser } from '../../../shared/types/dbUser';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +24,18 @@ export class UserFirebaseService {
         formData.password
       );
 
+      const dbUser: DbUser = {
+        email: formData.email,
+        phone: formData.phone,
+        name: formData.name,
+        country: formData.country,
+        zip: formData.zip,
+        city: formData.city,
+        address: formData.address,
+      };
+
       const userRef = doc(this.firestore, `users/${userCredential.user.uid}`);
-      await setDoc(userRef, formData);
+      await setDoc(userRef, dbUser);
 
       console.log('Felhasználó sikeresen regisztrálva és adatbázisba mentve.');
     } catch (error) {
