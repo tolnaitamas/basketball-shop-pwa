@@ -5,9 +5,11 @@ import { Product } from '../../shared/types/product';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ManagementService } from '../../services/management/management.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
+  standalone: true,
   imports: [
     FooterComponent,
     CartItemCardComponent,
@@ -20,35 +22,36 @@ import { ManagementService } from '../../services/management/management.service'
 export class CartPageComponent {
   products: Product[] = [];
   isEmpty = false;
+  totalPrice = 0;
+
+  private subscription!: Subscription;
 
   constructor(public managementService: ManagementService) {}
 
-  async ngOnInit(): Promise<void> {
-    await this.getCartItems();
-  }
-
-  async ngOnChanges(): Promise<void> {
-    await this.getCartItems();
-  }
-
-  private async getCartItems(): Promise<void> {
-    try {
-      this.products = await this.managementService.loadProducts();
-      //this.totalPriceCalculation();
-      if (this.products.length > 0) {
-        this.isEmpty = false;
-      } else {
-        this.isEmpty = true;
+  ngOnInit(): void {
+    this.subscription = this.managementService.products$.subscribe(
+      (products) => {
+        this.products = products;
+        this.isEmpty = products.length === 0;
+        this.calculateTotalPrice();
       }
-    } catch (error) {
-      console.error('Error loading cart items:', error);
-    }
+    );
   }
 
-  clearCart() {
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  clearCart(): void {
     this.managementService.clearCart();
     this.products = [];
-    /*this.totalPrice = 0;
-    this.isCartEmpty = true;*/
+    this.totalPrice = 0;
+  }
+
+  private calculateTotalPrice(): void {
+    this.totalPrice = this.products.reduce((sum, product) => {
+      const price = product.price || 0;
+      return sum + price;
+    }, 0);
   }
 }
