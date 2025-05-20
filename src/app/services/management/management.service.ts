@@ -121,12 +121,14 @@ export class ManagementService {
       const product = event.target.result;
 
       if (product) {
-        product.quantity = quantity;
         if (product.quantity < quantity) {
+          product.quantity = quantity;
           this.productQuantityService.setQuantity(
             this.productQuantityService.getQuantity() + 1
           );
         } else {
+          product.quantity = quantity;
+
           this.productQuantityService.setQuantity(
             this.productQuantityService.getQuantity() - 1
           );
@@ -165,11 +167,22 @@ export class ManagementService {
     const transaction = this.db.transaction(this.objectStoreName, 'readwrite');
     const objectStore = transaction.objectStore(this.objectStoreName);
 
-    objectStore.delete(id).onsuccess = async () => {
-      this.productQuantityService.setQuantity(
-        this.productQuantityService.getQuantity() - 1
-      );
-      await this.loadProducts();
+    const getRequest = objectStore.get(id);
+
+    getRequest.onsuccess = async (event: any) => {
+      const product = event.target.result;
+
+      if (product) {
+        const quantityToRemove = product.quantity || 1;
+
+        const deleteRequest = objectStore.delete(id);
+        deleteRequest.onsuccess = async () => {
+          this.productQuantityService.setQuantity(
+            this.productQuantityService.getQuantity() - quantityToRemove
+          );
+          await this.loadProducts();
+        };
+      }
     };
   }
 
