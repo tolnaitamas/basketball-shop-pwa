@@ -31,6 +31,7 @@ export class MainPageComponent {
 
     this.productsService.getProductsCollection().subscribe(
       (data) => {
+        this.productsService.setProducts(data);
         this.products = data;
         console.log('Termékek:', this.products);
       },

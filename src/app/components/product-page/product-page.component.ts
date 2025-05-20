@@ -6,6 +6,8 @@ import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
+import { ProductFirebaseService } from '../../services/firebase/product/product-firebase.service';
+import { ManagementService } from '../../services/management/management.service';
 
 @Component({
   selector: 'app-product-page',
@@ -22,19 +24,28 @@ import { ProductCardComponent } from '../../shared/product-card/product-card.com
 export class ProductPageComponent {
   product: Product;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private productsService: ProductFirebaseService,
+    private managementService: ManagementService
+  ) {
     const navigation = this.router.getCurrentNavigation();
     this.product = navigation?.extras?.state?.['product'];
   }
 
   inStock = true;
 
+  products: Product[] = [];
+
   ngOnInit(): void {
     const state = history.state;
     if (state && state.product) {
       this.product = state.product;
-    } else {
-      // fallback logic (e.g. fetch from API based on ID param)
+
+      const cached = this.productsService.getProductsSnapshot();
+      if (cached) {
+        this.products = cached;
+      }
     }
   }
 
@@ -44,57 +55,6 @@ export class ProductPageComponent {
 
   addToCart() {
     console.log('Kosárba:', this.product);
-    // implement real cart logic here
+    this.managementService.createProduct(this.product);
   }
-
-  products: Product[] = [
-    {
-      id: 1,
-      sex: 'Férfi',
-      brand: 'Jordan',
-      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
-      imageUrl: 'main-page/asd.webp',
-      category: 'clothes',
-      price: 53999,
-      sizes: [40, 41, 45, 45.5],
-      selectedSize: 40,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      sex: 'Férfi',
-      brand: 'Nike',
-      name: 'Nike Air Max 97 Silver Bullet',
-      imageUrl: 'main-page/asd.webp',
-      category: 'shoes',
-      price: 74999,
-      sizes: [42, 43, 44],
-      selectedSize: 42,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      sex: 'Női',
-      brand: 'Adidas',
-      name: 'Adidas UltraBoost 21',
-      imageUrl: 'main-page/asd.webp',
-      category: 'caps',
-      price: 86999,
-      sizes: [40, 41, 42, 43],
-      selectedSize: 41,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      sex: 'Férfi',
-      brand: 'Puma',
-      name: 'Puma RS-X3',
-      imageUrl: 'main-page/asd.webp',
-      category: 'other',
-      price: 59999,
-      sizes: [43, 44, 45],
-      selectedSize: 44,
-      quantity: 1,
-    },
-  ];
 }

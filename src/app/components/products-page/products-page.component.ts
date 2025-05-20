@@ -8,6 +8,7 @@ import { ProductCardComponent } from '../../shared/product-card/product-card.com
 import { Product } from '../../shared/types/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductFirebaseService } from '../../services/firebase/product/product-firebase.service';
 
 @Component({
   selector: 'app-products-page',
@@ -37,6 +38,15 @@ export class ProductsPageComponent {
 
   sizes = Array.from({ length: 11 }, (_, i) => 35 + i); // 35-45
   brands = ['Adidas', 'Nike', 'Jordan', 'Puma'];
+
+  constructor(private productsService: ProductFirebaseService) {}
+
+  ngOnInit(): void {
+    const cached = this.productsService.getProductsSnapshot();
+    if (cached) {
+      this.products = cached;
+    }
+  }
 
   applyFilters() {
     const filteredProducts = this.products.filter((product) => {
