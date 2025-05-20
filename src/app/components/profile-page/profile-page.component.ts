@@ -88,4 +88,7 @@ export class ProfilePageComponent {
   logout() {
     this.authServeice.logout();
   }
+  delete() {
+    this.authServeice.logout();
+  }
 }

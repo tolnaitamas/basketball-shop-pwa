@@ -4,7 +4,7 @@
       <h3>BELÉPÉS</h3>
     </div>
 
-    <form [formGroup]="userForm" (ngSubmit)="login()">
+    <form [formGroup]="userForm">
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="email" type="email" required />
@@ -20,7 +20,8 @@
           mat-raised-button
           color="primary"
           class="login-button"
-          type="submit"
+          type="button"
+          (click)="login()"
         >
           Belép <span class="arrow">→</span>
         </button>
@@ -29,7 +30,8 @@
           mat-raised-button
           color="primary"
           class="register-button"
-          (click)="login()"
+          type="button"
+          routerLink="/register"
         >
           Regisztráció <mat-icon>edit</mat-icon>
         </button>

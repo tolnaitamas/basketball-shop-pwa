@@ -1,5 +1,5 @@
 <div class="register-container">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registerForm">
     <div class="modal-header">
       <h3>PROFIL</h3>
       <h5>ADATOK MÓDOSÍTÁSA</h5>
@@ -72,21 +72,30 @@
         mat-raised-button
         color="primary"
         class="submit-btn"
-        type="submit"
+        type="button"
+        (click)="onSubmit()"
       >
         Módosítás <mat-icon>edit</mat-icon>
       </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        type="button"
+        (click)="logout()"
+      >
+        Kijelentkezés <mat-icon>logout</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        type="button"
+        (click)="delete()"
+      >
+        Profil törlése <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </form>
-  <div class="button-wrapper">
-    <button
-      mat-raised-button
-      color="primary"
-      class="submit-btn"
-      (click)="logout()"
-    >
-      Kijelentkezés <mat-icon>logout</mat-icon>
-    </button>
-  </div>
 </div>
 <app-footer></app-footer>

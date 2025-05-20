@@ -86,6 +86,7 @@ $breakpoint-sm: 600px;
 
     .submit-btn {
       @include button-style;
+      margin-top: 10px;
     }
   }
 

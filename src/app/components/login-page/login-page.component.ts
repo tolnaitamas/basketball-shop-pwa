@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { AuthFirebaseService } from '../../services/firebase/authorization/auth-firebase.service';
 
@@ -18,6 +18,7 @@ import { AuthFirebaseService } from '../../services/firebase/authorization/auth-
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
