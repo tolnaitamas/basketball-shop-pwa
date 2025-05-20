@@ -19,10 +19,10 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { RegisterUser } from '../../../shared/types/registeruser';
-import { DbUser } from '../../../shared/types/dbUser';
 import { Observable, switchMap, of } from 'rxjs';
 import { AuthFirebaseService } from '../authorization/auth-firebase.service';
 import { FormGroup } from '@angular/forms';
+import { DbUser } from '../../../shared/types/dbuser';
 
 @Injectable({
   providedIn: 'root',

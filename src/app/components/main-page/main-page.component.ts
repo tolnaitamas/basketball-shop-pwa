@@ -4,6 +4,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { Router } from '@angular/router';
 import { Product } from '../../shared/types/product';
+import { ProductFirebaseService } from '../../services/firebase/product/product-firebase.service';
 
 @Component({
   selector: 'app-main-page',
@@ -12,8 +13,13 @@ import { Product } from '../../shared/types/product';
   styleUrl: './main-page.component.scss',
 })
 export class MainPageComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private productsService: ProductFirebaseService
+  ) {}
   images = ['/main-page/slider1.webp', '/main-page/slider2.webp'];
+
+  products: Product[] = [];
 
   currentIndex = 0;
   intervalId: any;
@@ -21,7 +27,17 @@ export class MainPageComponent {
   ngOnInit() {
     this.intervalId = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    }, 3000); // 3 másodpercenként
+    }, 3000);
+
+    this.productsService.getProductsCollection().subscribe(
+      (data) => {
+        this.products = data;
+        console.log('Termékek:', this.products);
+      },
+      (error) => {
+        console.error('Hiba a termékek betöltésekor:', error);
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -31,55 +47,4 @@ export class MainPageComponent {
   navigateTo(path: string): void {
     this.router.navigate([path]);
   }
-
-  products: Product[] = [
-    {
-      id: 1,
-      sex: 'Férfi',
-      brand: 'Jordan',
-      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
-      imageUrl: 'main-page/asd.webp',
-      category: 'clothes',
-      price: 53999,
-      sizes: [40, 41, 45, 45.5],
-      selectedSize: 40,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      sex: 'Férfi',
-      brand: 'Nike',
-      name: 'Nike Air Max 97 Silver Bullet',
-      imageUrl: 'main-page/asd.webp',
-      category: 'shoes',
-      price: 74999,
-      sizes: [42, 43, 44],
-      selectedSize: 42,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      sex: 'Női',
-      brand: 'Adidas',
-      name: 'Adidas UltraBoost 21',
-      imageUrl: 'main-page/asd.webp',
-      category: 'caps',
-      price: 86999,
-      sizes: [40, 41, 42, 43],
-      selectedSize: 41,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      sex: 'Férfi',
-      brand: 'Puma',
-      name: 'Puma RS-X3',
-      imageUrl: 'main-page/asd.webp',
-      category: 'other',
-      price: 59999,
-      sizes: [43, 44, 45],
-      selectedSize: 44,
-      quantity: 1,
-    },
-  ];
 }
