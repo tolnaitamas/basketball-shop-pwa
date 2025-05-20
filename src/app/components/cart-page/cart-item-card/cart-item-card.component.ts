@@ -11,6 +11,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ManagementService } from '../../../services/management/management.service';
+import { ProductFirebaseService } from '../../../services/firebase/product/product-firebase.service';
 
 @Component({
   selector: 'app-cart-item-card',
@@ -39,11 +40,32 @@ export class CartItemCardComponent {
 
   prize: number = 0;
   isRemoved = false;
+  products: Product[] = [];
 
-  constructor(private managementService: ManagementService) {}
+  constructor(
+    private managementService: ManagementService,
+    private productsService: ProductFirebaseService
+  ) {}
 
-  ngOnInit() {
-    this.prize = this.product.price;
+  async ngOnInit() {
+    const cached = this.productsService.getProductsSnapshot();
+    if (cached) {
+      this.products = cached;
+
+      const matchingProduct = this.products.find(
+        (p) => p.id === this.product.id
+      );
+
+      if (matchingProduct) {
+        this.prize = matchingProduct.price;
+      } else {
+        console.warn(
+          `Termék nem található a cache-ben ID alapján: ${this.product.id}`
+        );
+      }
+    } else {
+      console.warn('Nincsenek lekérve a termékek.');
+    }
   }
 
   async updateQuantity(event: Event) {
