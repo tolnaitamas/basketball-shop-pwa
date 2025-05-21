@@ -5,7 +5,7 @@ import {
   collection,
   collectionData,
 } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../../shared/types/product';
 
 @Injectable({
@@ -16,7 +16,15 @@ export class ProductFirebaseService {
   products$ = this.productsSubject.asObservable();
 
   constructor(private firestore: Firestore) {
-    this.loadProducts(); // 🔁 Lekérés és cache-elés
+    this.loadProducts();
+  }
+
+  setProducts(products: Product[]) {
+    this.productsSubject.next(products);
+  }
+
+  getProductsSnapshot(): Product[] | null {
+    return this.productsSubject.value;
   }
 
   private loadProducts(): void {
@@ -26,16 +34,15 @@ export class ProductFirebaseService {
     ) as CollectionReference<Product>;
     collectionData<Product>(productsRef, { idField: 'id' }).subscribe(
       (products) => {
-        this.productsSubject.next(products); // 🔁 cache update
+        this.productsSubject.next(products);
       }
     );
   }
 
-  getProductsSnapshot(): Product[] | null {
-    return this.productsSubject.value; // 🔁 aktuális cache-elt érték
-  }
-
-  setProducts(products: Product[]): void {
-    this.productsSubject.next(products); // 🔁 manuális frissítés ha kell
+  getProductsCollection(): Observable<Product[]> {
+    const productsRef = collection(this.firestore, 'product');
+    return collectionData(productsRef, { idField: 'id' }) as Observable<
+      Product[]
+    >;
   }
 }

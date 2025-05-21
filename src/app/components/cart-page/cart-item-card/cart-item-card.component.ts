@@ -58,11 +58,6 @@ export class CartItemCardComponent {
 
       if (matchingProduct) {
         this.prize = matchingProduct.price;
-        this.product.price = this.prize * this.product.quantity;
-        this.managementService.updateProductQuantityPrice(
-          this.product.id,
-          this.product.quantity * this.prize
-        );
       } else {
         console.warn(
           `Termék nem található a cache-ben ID alapján: ${this.product.id}`

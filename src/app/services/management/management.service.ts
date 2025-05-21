@@ -84,6 +84,10 @@ export class ManagementService {
       const existingProduct = event.target.result;
 
       if (existingProduct) {
+        existingProduct.price =
+          (existingProduct.price / existingProduct.quantity) *
+          (existingProduct.quantity + 1);
+
         this.productQuantityService.setQuantity(
           this.productQuantityService.getQuantity() + 1
         );
