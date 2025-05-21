@@ -60,13 +60,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'our-stores',
-    loadComponent: () =>
-      import('./components/our-stores-page/our-stores-page.component').then(
-        (c) => c.OurStoresPageComponent
-      ),
-  },
-  {
     path: 'return',
     loadComponent: () =>
       import('./components/return-page/return-page.component').then(
