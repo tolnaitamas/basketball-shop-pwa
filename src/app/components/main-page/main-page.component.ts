@@ -5,10 +5,16 @@ import { ProductCardComponent } from '../../shared/product-card/product-card.com
 import { Router } from '@angular/router';
 import { Product } from '../../shared/types/product';
 import { ProductFirebaseService } from '../../services/firebase/product/product-firebase.service';
+import { HighlightDirective } from '../../shared/highlight-directive/highlight.directive';
 
 @Component({
   selector: 'app-main-page',
-  imports: [CommonModule, FooterComponent, ProductCardComponent],
+  imports: [
+    CommonModule,
+    FooterComponent,
+    ProductCardComponent,
+    HighlightDirective,
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
 })
