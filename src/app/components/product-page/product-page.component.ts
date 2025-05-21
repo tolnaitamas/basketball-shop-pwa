@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { ProductFirebaseService } from '../../services/firebase/product/product-firebase.service';
 import { ManagementService } from '../../services/management/management.service';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
@@ -45,6 +46,13 @@ export class ProductPageComponent {
       const cached = this.productsService.getProductsSnapshot();
       if (cached) {
         this.products = cached;
+      } else {
+        this.productsService.products$
+          .pipe(
+            filter((p) => !!p), // csak ha nem null vagy undefined
+            take(1)
+          )
+          .subscribe((p) => (this.products = p));
       }
     }
   }

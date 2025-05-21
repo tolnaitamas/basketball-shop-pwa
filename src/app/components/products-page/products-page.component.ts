@@ -9,6 +9,7 @@ import { Product } from '../../shared/types/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductFirebaseService } from '../../services/firebase/product/product-firebase.service';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-products-page',
@@ -45,6 +46,13 @@ export class ProductsPageComponent {
     const cached = this.productsService.getProductsSnapshot();
     if (cached) {
       this.products = cached;
+    } else {
+      this.productsService.products$
+        .pipe(
+          filter((p) => !!p), // csak ha nem null vagy undefined
+          take(1)
+        )
+        .subscribe((p) => (this.products = p));
     }
   }
 

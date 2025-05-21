@@ -29,16 +29,11 @@ export class MainPageComponent {
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
     }, 3000);
 
-    this.productsService.getProductsCollection().subscribe(
-      (data) => {
-        this.productsService.setProducts(data);
-        this.products = data;
-        console.log('Termékek:', this.products);
-      },
-      (error) => {
-        console.error('Hiba a termékek betöltésekor:', error);
+    this.productsService.products$.subscribe((products) => {
+      if (products) {
+        this.products = products;
       }
-    );
+    });
   }
 
   ngOnDestroy() {
