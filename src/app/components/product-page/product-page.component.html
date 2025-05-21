@@ -3,12 +3,10 @@
   <p class="product-id">Cikkszám: {{ product.id }}</p>
 
   <div class="product-container">
-    <!-- Kép -->
     <div class="product-image">
       <img [src]="product.imageUrl" alt="{{ product.name }}" />
     </div>
 
-    <!-- Adatok -->
     <div class="product-info">
       <p><strong>Cikkszám:</strong> {{ product.id }}</p>
       <p><strong>Márka:</strong> {{ product.brand }}</p>
@@ -16,7 +14,6 @@
       <p><strong>Ár:</strong> {{ product.price }} Ft</p>
     </div>
 
-    <!-- Méret + Gomb -->
     <div class="product-action">
       <label>Méret:</label>
       <div class="sizes">

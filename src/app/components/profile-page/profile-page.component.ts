@@ -10,10 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RegisterUser } from '../../shared/types/registeruser';
 import { AuthFirebaseService } from '../../services/firebase/authorization/auth-firebase.service';
 import { UserFirebaseService } from '../../services/firebase/user/user-firebase.service';
-import { Auth, deleteUser } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { DbUser } from '../../shared/types/dbuser';
 @Component({

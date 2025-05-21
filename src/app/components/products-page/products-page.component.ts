@@ -27,7 +27,9 @@ import { filter, take } from 'rxjs';
   styleUrl: './products-page.component.scss',
 })
 export class ProductsPageComponent {
-  filteredProducts: Product[] = []; // Szűrt terméklista
+  filteredProducts: Product[] = [];
+
+  products: Product[] = [];
 
   filters = {
     sex: '',
@@ -37,7 +39,7 @@ export class ProductsPageComponent {
     sortBy: '',
   };
 
-  sizes = Array.from({ length: 11 }, (_, i) => 35 + i); // 35-45
+  sizes = Array.from({ length: 11 }, (_, i) => 35 + i);
   brands = ['Adidas', 'Nike', 'Jordan', 'Puma'];
 
   constructor(private productsService: ProductFirebaseService) {}
@@ -49,7 +51,7 @@ export class ProductsPageComponent {
     } else {
       this.productsService.products$
         .pipe(
-          filter((p) => !!p), // csak ha nem null vagy undefined
+          filter((p) => !!p),
           take(1)
         )
         .subscribe((p) => (this.products = p));
@@ -87,103 +89,4 @@ export class ProductsPageComponent {
 
     console.log(filteredProducts);
   }
-
-  products: Product[] = [
-    {
-      id: 1,
-      sex: 'Férfi',
-      brand: 'Jordan',
-      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
-      imageUrl: 'main-page/asd.webp',
-      category: 'clothes',
-      price: 53999,
-      sizes: [40, 41, 45, 45.5],
-      selectedSize: 40,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      sex: 'Férfi',
-      brand: 'Nike',
-      name: 'Nike Air Max 97 Silver Bullet',
-      imageUrl: 'main-page/asd.webp',
-      category: 'shoes',
-      price: 74999,
-      sizes: [42, 43, 44],
-      selectedSize: 42,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      sex: 'Női',
-      brand: 'Adidas',
-      name: 'Adidas UltraBoost 21',
-      imageUrl: 'main-page/asd.webp',
-      category: 'caps',
-      price: 86999,
-      sizes: [40, 41, 42, 43],
-      selectedSize: 41,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      sex: 'Férfi',
-      brand: 'Puma',
-      name: 'Puma RS-X3',
-      imageUrl: 'main-page/asd.webp',
-      category: 'other',
-      price: 59999,
-      sizes: [43, 44, 45],
-      selectedSize: 44,
-      quantity: 1,
-    },
-    {
-      id: 5,
-      sex: 'Férfi',
-      brand: 'Jordan',
-      name: 'Air Jordan 1 Low White/Metallic Gold-Black',
-      imageUrl: 'main-page/asd.webp',
-      category: 'clothes',
-      price: 53999,
-      sizes: [40, 41, 45, 45.5],
-      selectedSize: 40,
-      quantity: 1,
-    },
-    {
-      id: 6,
-      sex: 'Férfi',
-      brand: 'Nike',
-      name: 'Nike Air Max 97 Silver Bullet',
-      imageUrl: 'main-page/asd.webp',
-      category: 'shoes',
-      price: 74999,
-      sizes: [42, 43, 44],
-      selectedSize: 42,
-      quantity: 1,
-    },
-    {
-      id: 7,
-      sex: 'Női',
-      brand: 'Adidas',
-      name: 'Adidas UltraBoost 21',
-      imageUrl: 'main-page/asd.webp',
-      category: 'caps',
-      price: 86999,
-      sizes: [40, 41, 42, 43],
-      selectedSize: 41,
-      quantity: 1,
-    },
-    {
-      id: 8,
-      sex: 'Férfi',
-      brand: 'Puma',
-      name: 'Puma RS-X3',
-      imageUrl: 'main-page/asd.webp',
-      category: 'other',
-      price: 59999,
-      sizes: [43, 44, 45],
-      selectedSize: 44,
-      quantity: 1,
-    },
-  ];
 }

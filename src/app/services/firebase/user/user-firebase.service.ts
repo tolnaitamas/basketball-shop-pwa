@@ -8,7 +8,6 @@ import {
   updateEmail,
   updatePassword,
   User,
-  UserProfile,
 } from '@angular/fire/auth';
 import {
   Firestore,

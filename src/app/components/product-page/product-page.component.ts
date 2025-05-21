@@ -49,7 +49,7 @@ export class ProductPageComponent {
       } else {
         this.productsService.products$
           .pipe(
-            filter((p) => !!p), // csak ha nem null vagy undefined
+            filter((p) => !!p),
             take(1)
           )
           .subscribe((p) => (this.products = p));

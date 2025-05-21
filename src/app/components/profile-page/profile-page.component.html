@@ -4,10 +4,13 @@
       <h3>PROFIL</h3>
       <h5>ADATOK MÓDOSÍTÁSA</h5>
     </div>
-    <!-- REGISZTRÁCIÓS ADATOK -->
     <div class="form-section">
-      <h3>REGISZTRÁCIÓS ADATOK</h3>
-      <mat-form-field appearance="fill" class="full-width">
+      <h3>JELSZÓ MÓDOSÍTÁS</h3>
+      <mat-form-field
+        appearance="fill"
+        class="full-width"
+        style="display: none"
+      >
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
@@ -24,7 +27,6 @@
       </div>
     </div>
 
-    <!-- KAPCSOLATTARTÓ ADATOK -->
     <div class="form-section">
       <h3>KAPCSOLATTARTÓ ADATOK</h3>
       <mat-form-field appearance="fill" class="half-width">
@@ -33,7 +35,6 @@
       </mat-form-field>
     </div>
 
-    <!-- SZÁLLÍTÁSI ADATOK -->
     <div class="form-section">
       <h3>SZÁLLÍTÁSI ADATOK</h3>
       <mat-form-field appearance="fill" class="full-width">
@@ -45,7 +46,6 @@
         <mat-label>Ország</mat-label>
         <mat-select formControlName="country">
           <mat-option value="hu">Magyarország</mat-option>
-          <!-- További opciók -->
         </mat-select>
       </mat-form-field>
 
@@ -66,7 +66,6 @@
       </mat-form-field>
     </div>
 
-    <!-- GOMB -->
     <div class="button-wrapper">
       <button
         mat-raised-button

@@ -53,13 +53,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'order',
-    loadComponent: () =>
-      import('./components/order-page/order-page.component').then(
-        (c) => c.OrderPageComponent
-      ),
-  },
-  {
     path: 'return',
     loadComponent: () =>
       import('./components/return-page/return-page.component').then(

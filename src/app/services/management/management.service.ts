@@ -18,7 +18,6 @@ export class ManagementService {
     this.dbReady = this.initDB();
   }
 
-  // ----- Inicializálás -----
   private initDB(): Promise<void> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open('products-db', 1);
@@ -39,13 +38,12 @@ export class ManagementService {
 
       request.onsuccess = (event: any) => {
         this.db = event.target.result;
-        this.loadProducts(); // első betöltés
+        this.loadProducts();
         resolve();
       };
     });
   }
 
-  // ----- Termékek betöltése -----
   public async loadProducts(): Promise<Product[]> {
     await this.dbReady;
 
@@ -71,7 +69,6 @@ export class ManagementService {
     });
   }
 
-  // ----- Termék hozzáadása vagy mennyiség növelése -----
   public async createProduct(product: Product): Promise<void> {
     await this.dbReady;
 
@@ -110,7 +107,6 @@ export class ManagementService {
     };
   }
 
-  // ----- Termék mennyiségének frissítése -----
   public async updateProductQuantity(
     id: number,
     quantity: number
@@ -143,7 +139,6 @@ export class ManagementService {
     };
   }
 
-  // ----- Termék árának frissítése -----
   public async updateProductQuantityPrice(
     id: number,
     price: number
@@ -164,7 +159,6 @@ export class ManagementService {
     };
   }
 
-  // ----- Termék eltávolítása -----
   public async removeProduct(id: number): Promise<void> {
     await this.dbReady;
 
@@ -190,7 +184,6 @@ export class ManagementService {
     };
   }
 
-  // ----- Kosár kiürítése -----
   public async clearCart(): Promise<void> {
     await this.dbReady;
 
@@ -203,7 +196,6 @@ export class ManagementService {
     };
   }
 
-  // ----- Egy termék lekérdezése ID alapján -----
   public async getProduct(id: number): Promise<Product> {
     await this.dbReady;
 

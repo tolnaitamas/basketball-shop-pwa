@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Product } from '../../../shared/types/product';
 import { Order } from '../../../shared/types/order';
 
 @Injectable({

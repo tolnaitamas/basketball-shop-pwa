@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { Router } from '@angular/router';
