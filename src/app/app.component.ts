@@ -38,7 +38,7 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    public productQuatityService: ProductQuantityService
+    public productQuantityService: ProductQuantityService
   ) {}
 
   sidenavOpened = false;
