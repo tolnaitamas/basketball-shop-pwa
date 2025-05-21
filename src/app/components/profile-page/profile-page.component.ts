@@ -15,6 +15,7 @@ import { AuthFirebaseService } from '../../services/firebase/authorization/auth-
 import { UserFirebaseService } from '../../services/firebase/user/user-firebase.service';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { DbUser } from '../../shared/types/dbuser';
 @Component({
   selector: 'app-profile-page',
   imports: [
@@ -57,21 +58,21 @@ export class ProfilePageComponent {
   }
 
   ngOnInit() {
-    this.userService.getUserProfile().subscribe((user) => {
+    this.userService.getUserProfile().subscribe((user: DbUser | null) => {
       if (user) {
         this.registerForm = this.fb.group({
-          email: [user['email'], [Validators.required, Validators.email]],
+          email: [user.email, [Validators.required, Validators.email]],
           currentPassword: ['', [Validators.required, Validators.minLength(6)]],
           newPassword: ['', [Validators.required, Validators.minLength(6)]],
           phone: [
-            user['phone'],
+            user.phone,
             [Validators.required, Validators.pattern('^[0-9]{9}$')],
           ],
-          name: [user['name'], Validators.required],
+          name: [user.name, Validators.required],
           country: ['hu', Validators.required],
-          zip: [user['zip'], Validators.required],
-          city: [user['city'], Validators.required],
-          address: [user['address'], Validators.required],
+          zip: [user.zip, Validators.required],
+          city: [user.city, Validators.required],
+          address: [user.address, Validators.required],
         });
       }
     });

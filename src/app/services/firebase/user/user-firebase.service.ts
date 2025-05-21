@@ -115,12 +115,12 @@ export class UserFirebaseService {
     }
   }
 
-  getUserProfile(): Observable<UserProfile | null> {
+  getUserProfile(): Observable<DbUser | null> {
     return this.currentUser$.pipe(
       switchMap((user) => {
         if (user) {
           const userDocRef = doc(this.firestore, `users/${user.uid}`);
-          return docData(userDocRef) as Observable<UserProfile>;
+          return docData(userDocRef) as Observable<DbUser>;
         } else {
           return of(null);
         }

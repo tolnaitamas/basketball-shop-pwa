@@ -40,7 +40,9 @@
       <button mat-flat-button>Ellenőrzés</button>
     </div>
 
-    <button mat-raised-button class="order-button">Megrendelés →</button>
+    <button mat-raised-button class="order-button" (click)="sendOrder()">
+      Megrendelés →
+    </button>
   </div>
 </div>
 <app-footer></app-footer>
